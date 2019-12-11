@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { APIService } from './api.service';
-import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-const API_HOST = environment.API_HOST;
-const GET_OTP_URL = `${API_HOST}/oyeliving/api/v1/account/sendotp`
-const VERIFY_OTP_URL = `${API_HOST}/oyeliving/api/v1/account/verifyotp`
-const RESEND_OTP_URL = `${API_HOST}/oyeliving/api/v1/account/resendotp`
-const OTP_BY_CALL = `http://control.msg91.com/api/retryotp.php`;
+import { HttpClient } from '@angular/common/http';
+import {GET_OTP_URL, VERIFY_OTP_URL, RESEND_OTP_URL, OTP_BY_CALL} from '../utils/url-constants'
 
 
 @Injectable({
@@ -20,7 +14,7 @@ export class OTPService extends APIService {
   }
 
   getOTP(mobileConfigs: any) {
-    return this.create(GET_OTP_URL, mobileConfigs)
+    return this.create(GET_OTP_URL, mobileConfigs, true)
   }
 
   verifyOTP(otpInfo: any) {

@@ -1,0 +1,33 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+input[type="text"],
+select.form-control {
+  background: transparent;
+  border: none;
+  border-bottom: 1.2px solid  #FFB81A; //rgb(240, 164, 51); ; //F08A33
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+select.form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+.logo-txt{
+
+}
+.first-column{
+
+}
+.login-box-column{
+
+}
+
+
+

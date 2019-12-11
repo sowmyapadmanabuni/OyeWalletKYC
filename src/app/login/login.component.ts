@@ -2,11 +2,12 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 // import { APIService } from '../services/api.service';
 import { OTPService } from '../services/otp.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -15,10 +16,11 @@ export class LoginComponent implements OnInit {
   otp: string;
   enable: boolean = false;
   dialCode: string = "";
+  mobileNumberWithDialCode = ""
 
   @ViewChild('get_otp_btn', { static: false }) getOtpBtnRef: ElementRef;
   @ViewChild('countdown_timer', { static: false }) countDownTimerRef: ElementRef;
-  constructor(private router: Router, private otpService: OTPService) { }
+  constructor(private router: Router, private otpService: OTPService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -26,14 +28,15 @@ export class LoginComponent implements OnInit {
   getOTP() {
     console.log("getOTP()")
     this.otpService.getOTP({
-      CountryCode: this.dialCode,
-      MobileNumber: this.mobileNumber
+      countryCode: this.dialCode,
+      mobileNumber: this.mobileNumber
     }).subscribe((res: any) => {
       console.log(res)
       if (res.success) {
         this.disableGetINButton = true;
+        this.showToast();
         this.startCountDownTimer();
-        
+
       }
     }, error => {
       console.log("getOTP()", error)
@@ -44,12 +47,16 @@ export class LoginComponent implements OnInit {
   getIN() { //verify OTP
     console.log("verifyOTP()")
     this.otpService.verifyOTP({
-      CountryCode: this.dialCode,
-      MobileNumber: this.mobileNumber,
-      OTPnumber: this.otp
+      mobileNumber: this.mobileNumberWithDialCode || `${this.dialCode}${this.mobileNumber}`,
+      otpNumber: this.otp
     }).subscribe((res: any) => {
       console.log("verify-res", res)
-      this.router.navigate(['/home'])
+      if (res && res.data && res.data.account) {
+        this.authService.saveToken(res.data.account.acAccntID);
+        this.router.navigate(['/home'])
+      } else {
+
+      }
     }, error => {
       console.log("getIN()", error)
     })
@@ -80,7 +87,7 @@ export class LoginComponent implements OnInit {
       console.log(data)
     })
   }
- 
+
   startCountDownTimer() {
     let timeLeft = 30;
     let countdownTimerElement = <HTMLDivElement>this.countDownTimerRef.nativeElement;
@@ -110,13 +117,12 @@ export class LoginComponent implements OnInit {
         }
       }
     }, 1000);
-
+  }
+  showToast() {
     // let x = document.getElementById("snackbar");
     // x.className = "show";
     // setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
-
   }
-
 
   /**
    * ng2-tel-net input handlers
@@ -125,7 +131,7 @@ export class LoginComponent implements OnInit {
 
   telInputObject(telinputobj) {
     this.dialCode = '+' + telinputobj['b'].getAttribute('data-dial-code');
-    console.log(this.dialCode);
+    // console.log(this.dialCode);
     // telinputobj.setCountry('in');
   }
   hasError(errorobj) {
@@ -137,9 +143,10 @@ export class LoginComponent implements OnInit {
     console.log(countryobj);
   }
 
-  getNumber(numberobj) {
-    console.log("getNumber", numberobj);
+  getNumber(number) {
+    console.log("getNumber", number);
     console.log("mobileNumber", this.mobileNumber);
+    this.mobileNumberWithDialCode = number;
     // return numberobj;
   }
 
