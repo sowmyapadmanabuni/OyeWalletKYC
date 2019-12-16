@@ -1,0 +1,36 @@
+//Text varibles
+$txt_primary_color:#FFB81A;
+$txt_primary_strong_color : rgb(240, 164, 51);
+$txt_secondary_color: #A09E9E;
+$txt_black_color:#000000;
+$warning_txt_color: rgb(255, 0, 0);
+$success_txt_color: rgb(0, 255, 0);
+$header_txt_fontfamily: 'Quicksand', Sans-serif !important;
+$secondary_txt_fontfamily: 'Calibri', Sans-serif !important;
+$header_txt_fontweight: 400;
+$secondary_txt_fontweight: 300;
+$mobile_header_txt_fontsize:28px;
+$tablet_header_txt_fontsize:40px;
+
+
+
+// Login page varibles
+$login_title_primary_color : $txt_primary_color;
+$login_txt_primary_strong_color :$txt_primary_strong_color;
+$login_txt_secondary_color: $txt_secondary_color;
+$login_box_title_color: $txt_black_color;
+$login_page_buttons_bgcolor: $txt_primary_color;
+$login_page_buttons_border_color: $txt_primary_strong_color;
+$login_header_txt_fontfamily: $header_txt_fontfamily;
+$login_other_txt_fontfamily: $secondary_txt_fontfamily;
+$login_title_txt_fontweight: $header_txt_fontweight;
+$login_title_txt_fontsize: 60px;
+$login_box_header_txt_fontweight: $header_txt_fontweight;
+$login_box_header_txt_fontsize: 28px;//2.2vw;
+
+//home page
+$home_title_primary_color : #A8A8A8; //$txt_secondary_color;
+$home_title_txt_fontsize: 33px;
+$home_title_txt_fontweight: 250;
+
+

@@ -1,53 +1,17 @@
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-5"
-			style="display: flex;flex-direction: column;flex: 1; min-height: 100vh;padding: 10px 5px 5px 2px;">
-			<div style="display: flex; flex-direction: row;">
-				<img class="img-responsive" src="assets/OyeWallet.png">
-			</div>
-			<div style="display: flex; flex-direction: row; align-items: center; justify-content: center;
-				font-family:Quiksand, Sans-serif !important; 
-				color: #FFB81A; 
-				opacity: 1;
-				font-size: 3.5vw;
-				font-weight: 200;
-				margin: 20px 0px 10px 0px;">
-				Login
-			</div>
-			<div
-				style="display: flex; flex:1;flex-direction: column; align-items: flex-end; justify-content: flex-end ;">
-				<img class="img-responsive center-block" src="assets/login_img.png">
-			</div>
-		</div>
-		<div class="col-sm-2"></div>	
-		<div class="col-sm-4">
+<div class="container-fluid login__container img-responsive">
 
-			<div class="col" style="
-			display:flex;
-			flex-direction:column;
-			align-items: center;
-			justify-content: center;
-			padding:60px 40px 60px 40px;
-			
-			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-			  transition: 0.3s; margin-top: 100px; border-radius: 20px;">
-				<div style="
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-family:Quiksand, Sans-serif !important; 
-				font-size: 2vw;
-				font-weight: 200;">
-					Get In
-				</div>
-				<div style="display: flex;
-				flex-direction: row;
-				align-items: baseline;
-				justify-content: space-between;
-				margin: 50px 0px 10px 0px;
-				width: 100%;">
+	<div class="row login__logo">
+		<img class="img-responsive" src="assets/OyeWallet.png">
+	</div>
+
+	<div class="login__box-container">
+			<div class="login__title-txt">Login</div>
+		<div>
+			<form #loginForm="ngForm" class="login__form">
+				<div class="login__form__header-txt">Get In</div>
+				<div class="login__form__mobileno-input">
 					<div class="form-group">
-						<div class="form-group" style="width:100%;">
+						<div class="form-group">
 							<input type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'in'}"
 								[disabled]="disableGetINButton" (ng2TelOutput)="getNumber($event)"
 								(intlTelInputObject)="telInputObject($event)" (hasError)="hasError($event)"
@@ -55,49 +19,115 @@
 								placeholder="Mobile Number" #mobilenumber="ngModel" id="mobnum"
 								pattern="^[6-9]{1}[0-9]{9}$" required [(ngModel)]='mobileNumber' maxlength="10"
 								minlength="10" class="form-control" />
-						</div>
-						<div class="alerts warning" *ngIf="mobilenumber?.invalid && mobilenumber?.touched">
-							<div *ngIf="mobilenumber?.errors?.required">
-								Mobile number is required
-							</div>
-							<div
-								*ngIf="(mobilenumber.invalid&&(mobilenumber?.errors?.minlength?.actualLength!=mobilenumber?.errors?.minlength?.requiredLength))">
-								Invalid mobile number
+							<div class="login__warning_txt" *ngIf="mobilenumber?.invalid && mobilenumber?.touched">
+								<div *ngIf="mobilenumber?.errors?.required">
+									Mobile number is required
+								</div>
+								<div
+									*ngIf="(mobilenumber.invalid&&(mobilenumber?.errors?.minlength?.actualLength!=mobilenumber?.errors?.minlength?.requiredLength))">
+									Invalid mobile number
+								</div>
 							</div>
 						</div>
 					</div>
 					<div>
-						<input type="button" #get_otp_btn value="Get OTP" class="btn btn-primary"
-							[disabled]="mobileNumber?.length!=10" (click)="getOTP()"
-							style="border-radius: 20px; background: #FFB81A;opacity:1;border-color:rgb(240, 164, 51)" />
+						<input type="button" #get_otp_btn value="Get OTP" class="btn btn-primary login__form__btn"
+							style="margin-left:12px ;" [disabled]="mobileNumber?.length!=10" (click)="getOTP()" />
 					</div>
 				</div>
-
 				<div class="form-group" style="width:100%">
-					<div style="display: flex;flex-direction: row; align-items: center;">
-						<img src="assets/key.png" width="24px" height="24px" style="position: absolute; margin-left: 4px; "/>
-						<input class="form-control" style="padding-left: 35px;" placeholder="Enter OTP" type="text" name="otp" [(ngModel)]="otp"
-							maxlength="6" required />
+					<div class="login__form__otp-input">
+						<img src="assets/key.png" width="24px" height="24px"
+							style="position: absolute; margin-left: 4px; " />
+						<input class="form-control" style="padding-left: 35px;" placeholder="Enter OTP" type="text"
+							name="otp" [(ngModel)]="otp" maxlength="6" required />
 					</div>
-
-					<a class="otp" aria-disabled="true" id="otpBycall" href="" (click)="OTPByCall($event)"
-						[class.disabled]="mobileNumber?.length!=10">OTP by Call</a><br>
+					<div class="login__otp_call_txt">
+						<a aria-disabled="true" id="otpBycall" href="" (click)="OTPByCall($event)"
+							[class.disabled]="mobileNumber?.length!=10">OTP by Call</a>
+						<div #countdown_timer></div>
+					</div>
+					<div *ngIf="errorMessage">{{errorMessage}}</div>
 				</div>
 				<div>
-					<input type="button" (click)="getIN(); loginForm.reset()" class="btn btn-primary"
-						style="border-radius: 20px;border-color: rgb(240, 164, 51); opacity:1;background: #FFB81A; margin-top:40px"
-						[disabled]="!((otp?.length)&&(disableGetINButton))" value="Get IN" />
+					<input type="button" (click)="getIN(); loginForm.reset()" class="btn btn-primary login__form__btn"
+						style="margin-top:40px" [disabled]="!((otp?.length)&&(disableGetINButton))" value="Get IN" />
 				</div>
+				<div #notification_message_container style="margin-top: 20px;" [ngClass]="{'login__warning_txt':!notificationMessageToggle,
+																'login__success_txt':notificationMessageToggle}">
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div>
+
+
+<!-- style="background: url('../../assets/login_img_new.png');" -->
+<!-- <div class="container-fluid login-container" >
+	<div class="row">
+		<div class="col-sm-5 first-column">
+			<img class="img-responsive" src="assets/OyeWallet.png">
+			<div class="first-column__header-txt">Login</div>
+			<!-- <div class="first-column__image-container">
+				<img class="img-responsive center-block" src="assets/login_img_new.png">
+			</div> --
+		</div>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-4">
+			<form  #loginForm="ngForm" class="col login__container">
+				<div class="login__header-txt">Get In</div>
+				<div class="login__first-input-row">
+					<div class="form-group">
+						<div class="form-group">
+							<input type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'in'}"
+								[disabled]="disableGetINButton" (ng2TelOutput)="getNumber($event)"
+								(intlTelInputObject)="telInputObject($event)" (hasError)="hasError($event)"
+								(countryChange)="onCountryChange($event)" name="mobilenumber"
+								placeholder="Mobile Number" #mobilenumber="ngModel" id="mobnum"
+								pattern="^[6-9]{1}[0-9]{9}$" required [(ngModel)]='mobileNumber' maxlength="10"
+								minlength="10" class="form-control" />
+							<div class="alerts warning_txt" *ngIf="mobilenumber?.invalid && mobilenumber?.touched">
+								<div *ngIf="mobilenumber?.errors?.required">
+									Mobile number is required
+								</div>
+								<div
+									*ngIf="(mobilenumber.invalid&&(mobilenumber?.errors?.minlength?.actualLength!=mobilenumber?.errors?.minlength?.requiredLength))">
+									Invalid mobile number
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<input type="button" #get_otp_btn value="Get OTP" class="btn btn-primary login__btn" style="margin-left:12px ;"
+							[disabled]="mobileNumber?.length!=10" (click)="getOTP()" />
+					</div>
+				</div>
+				<div class="form-group" style="width:100%">
+					<div style="display: flex;flex-direction: row; align-items: center;">
+						<img src="assets/key.png" width="24px" height="24px"
+							style="position: absolute; margin-left: 4px; " />
+						<input class="form-control" style="padding-left: 35px;" placeholder="Enter OTP" type="text"
+							name="otp" [(ngModel)]="otp" maxlength="6" required />
+					</div>
+					<div class="otp_call_txt">
+						<a aria-disabled="true" id="otpBycall" href="" (click)="OTPByCall($event)"
+							[class.disabled]="mobileNumber?.length!=10">OTP by Call</a>
+						<div #countdown_timer></div>
+					</div>
+					<div *ngIf="errorMessage">{{errorMessage}}</div>
+				</div>
+				<div>
+					<input type="button" (click)="getIN(); loginForm.reset()" class="btn btn-primary login__btn"
+						style="margin-top:40px" [disabled]="!((otp?.length)&&(disableGetINButton))" value="Get IN" />
+				</div>
+				<div #notification_message_container style="margin-top: 20px;" [ngClass]="{'warning_txt':!notificationMessageToggle,
+																'success_txt':notificationMessageToggle}">
+				</div>
+			</form>
+			<div class="col-sm-1">
 
 			</div>
 
-
-
-
 		</div>
-		<div class="col-sm-1">
-
-		</div>
-
-	</div>
-</div>
+	</div> -->

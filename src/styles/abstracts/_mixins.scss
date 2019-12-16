@@ -4,3 +4,38 @@
     align-items: $alignItems;
     justify-content: $justifyContent;
 }
+
+@mixin  font-group ($fontFamily, $color,$fontSize,$fontWeight){
+    font-family: $fontFamily; 
+	color: $color; 
+	opacity: 1;
+	font-size: $fontSize;
+	font-weight: $fontWeight;
+}
+
+@mixin card-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 20px;
+}
+@mixin no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+    > .col,
+    > [class*="col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+    
+}
+@mixin  line ($height, $flexRatio, $margin, $color){
+    height:$height;
+    flex:$flexRatio;
+    margin:$margin;
+    background-color:$color;
+    // margin-left:20px;
+    // margin-bottom:10px; 
+    // background-color:rgb(230, 223, 223)
+}

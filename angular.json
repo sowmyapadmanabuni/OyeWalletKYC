@@ -28,7 +28,9 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles/main.scss"
             ],
             "stylePreprocessorOptions": {
@@ -37,6 +39,9 @@
               ]
             },
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
               "node_modules/intl-tel-input/build/js/utils.js"
             ]

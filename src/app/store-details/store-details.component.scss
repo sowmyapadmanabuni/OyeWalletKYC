@@ -1,0 +1,57 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+
+.no-gutters {
+   @include no-gutters;
+}
+
+.card-shadow {
+    @include card-shadow;
+    border-radius: 2px;
+    padding: 10px 30px 20px 30px;
+    width: 100%;
+    // min-height: 70vh;
+    // position: relative;
+}
+tr{
+    border-style: none none solid none;
+    border-width: thin;
+    border-color: rgb(224, 219, 219);
+    height:70px;     
+} 
+th{
+    @include font-group($secondary_txt_fontfamily,#707070,18px, 400);
+    // text-align: center;
+}
+td{
+    @include font-group($secondary_txt_fontfamily,#000000,16px, 400);
+}
+.left_bar_img{
+  height:86vh;
+};
+.title_container{
+  @include flex-container(row, center, flex-start);
+  padding: 4px;
+  flex: 1;
+}
+.header-text{
+  @include font-group($header_txt_fontfamily,#000000,30px, 400);
+   padding: 4px;
+}
+.status-text-box{
+  @include flex-container(row, center, flex-end);
+  @include font-group($header_txt_fontfamily,#000000,16px, 500);
+  flex:1;
+  padding: 4px;
+}
+.status_txt {
+  @include font-group($header_txt_fontfamily,$txt_primary_color,16px, 500);
+}
+.button_group {
+  @include flex-container(row, center, center);
+  margin-top: 40px;
+}

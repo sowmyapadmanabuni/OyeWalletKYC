@@ -1,0 +1,73 @@
+<div class="container-fluid no-gutters">
+    <div style="margin-top: 20px;">
+        <img class="img-responsive" src="assets/OyeWallet.png">
+    </div>
+    <div class="row no-gutters">
+        <div class="col-sm-1 d-none d-sm-block no-gutters" style="margin-top: 20px;">
+            <img class="img-responsive left_bar_img" src="assets/home_left_side.png">
+        </div>
+        <div class="col-sm-10 col-xs-12 no-gutters">
+            <div class="row no-gutters">
+                <div class="title_container">
+                    <img class="img-responsive" src="assets/home_bag.png">
+                    <div class="header-text">
+                        Cafe N Cakes</div>
+                    <div class="status-text-box">
+                        Status - <div class="status_txt">{{storeStatus}}</div>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="row no-gutters" style="margin-top:20px">
+                <div class="card-shadow">
+                    <div>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 5%;">
+                                        <input type="checkbox" (change)="CheckAllOptions(this)">
+                                    </th>
+                                    <th scope="col" style="width: 40%;">
+                                        Select All
+                                    </th>
+                                    <th scope="col" style="width: 55%;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="checkOption(this)">
+                                    </td>
+                                    <td class="store_name_style align-middle">xyz</td>
+                                    <td class="store_name_style align-middle">Mark</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="checkOption(this)">
+                                    </td>
+                                    <td class="store_name_style align-middle">xyz</td>
+                                    <td class="store_name_style align-middle">Mark</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="checkOption(this)">
+                                    </td>
+                                    <td class="store_name_style align-middle">xyz</td>
+                                    <td class="store_name_style align-middle">Mark</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="button_group">
+                        <input type='button' style="margin-right: 5px;" class="btn btn-info" value="Approve">
+                        <input type='button' style="margin-left: 5px;" class="btn btn-danger" value="Reject">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1 no-gutters"></div>
+
+    </div>
+
+</div>

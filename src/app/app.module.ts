@@ -9,13 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import { CountDownTimerComponent } from './count-down-timer/count-down-timer.component';
+import { StoreDetailsComponent } from './store-details/store-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    CountDownTimerComponent
+    CountDownTimerComponent,
+    StoreDetailsComponent
   ],
   imports: [
     BrowserModule,

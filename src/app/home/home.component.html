@@ -1,52 +1,167 @@
-<div class="container">
-    <div [hidden]="submitted">
-        <h1>Hero Form</h1>
-        <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name"
-                    #name="ngModel">
-                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                    Name is required
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="alterEgo">Alter Ego</label>
-                <input type="text" class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
-            </div>
-
-            <div class="form-group">
-                <label for="power">Hero Power</label>
-                <select class="form-control" id="power" required [(ngModel)]="model.power" name="power"
-                    #power="ngModel">
-                    <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-                </select>
-                <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
-                    Power is required
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
-            <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button>
-        </form>
+<div class="container-fluid home__container img-responsive no-gutters">
+    <div class="row align-items-center no-gutters">
+        <div class="col-sm-2" style="margin-top: 20px;">
+            <img class="img-responsive" src="assets/OyeWallet.png">
+        </div>
+        <div class="col-sm-8 home__header-title">
+            Welcome to OyeWallet Merchant
+        </div>
+        <div class="col-sm-2"></div>
     </div>
+    <div class="row no-gutters" style="margin-top: 20px;">
+        <div class="d-none d-sm-block col-sm-1">
+            <img class="img-responsive home__left_bar_img" src="assets/home_left_side.png">
+        </div>
+        <div class="col-xs-12 col-sm-11">
+            <div class="row no-gutters align-items-end">
+                <img class="img-responsive" src="assets/home_bag.png">
+                <div class="home__secondary_title" >Shop List</div>
+                <div class="home__line">
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-sm-9 col-xs-12 no-gutters">
+                    <div style="margin-top: 30px;">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Shop Name</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>image</td>
+                                    <td class="store_name_style">xyz</td>
+                                    <td>Mark</td>
+                                </tr>
+                                <tr>
+                                    <td>image-1</td>
+                                    <td class="store_name_style">abc</td>
+                                    <td>Jacob</td>
+                                </tr>
+                                <tr>
+                                    <td>image-2</td>
+                                    <td class="store_name_style">3def</td>
+                                    <td>Larry</td>
+                                </tr>
+                                <tr>
+                                    <td>image</td>
+                                    <td class="store_name_style">xyz</td>
+                                    <td>Mark</td>
+                                </tr>
+                                <tr>
+                                    <td>image-1</td>
+                                    <td class="store_name_style">abc</td>
+                                    <td>Jacob</td>
+                                </tr>
+                                <tr>
+                                    <td>image-2</td>
+                                    <td class="store_name_style">3def</td>
+                                    <td>Larry</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-3 col no-gutters home__right_side_img">
+                    <img class="img-responsive" style="width: 80%;" src="assets/home_side.png">
+                </div>
+            </div>
+        </div>
 
-    <div [hidden]="!submitted">
-        <h2>You submitted the following:</h2>
-        <div class="row">
-            <div class="col-xs-3">Name</div>
-            <div class="col-xs-9">{{ model.name }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Alter Ego</div>
-            <div class="col-xs-9">{{ model.alterEgo }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Power</div>
-            <div class="col-xs-9">{{ model.power }}</div>
-        </div>
-        <br>
-        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
     </div>
 </div>
+
+<!-- <div class="container-fluid home__container img-responsive  no-gutters">
+    <div class="row align-items-center no-gutters">
+        <div class="col-sm-2" style="margin-top: 20px;">
+            <img class="img-responsive" src="assets/OyeWallet.png">
+        </div>
+        <div class="col-sm-8 header-text">
+            Welcome to OyeWallet Merchant
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-11">
+            <div class="row no-gutters" style="background-color: aqua; min-height: 100px;"></div>
+            <div class="row no-gutters"  style="display: flex; flex-direction: row; align-items: center; justify-content: center;min-height: 100%;">
+                <div class="col-sm-9" style="background-color: rebeccapurple; min-height: 300px; ">
+
+                </div>
+                <div class="col-sm-3"
+                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+
+                    <img class="img-responsive" width=80% src="assets/home_side.png">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+<!-- <div class="row">
+    <div class="col-sm-2">
+        <img class="img-responsive" src="assets/OyeWallet.png">
+    </div>
+    <div class="col-sm-10">
+        Welcome to OyeWallet Merchant
+        <img class="img-responsive" style="position: absolute;z-index: -1;top: 0;right: 0;width: 200px;" src="assets/home_side_img.png">
+    </div>
+   
+</div>
+<div class="row">
+    <div class="col-sm-1" style="background:url('../../assets/home_left_side.png');background-size: contain;
+    background-position: left;
+    height: 500px;
+    background-repeat: no-repeat;">
+    
+    </div>
+    <div class="col-sm-9">
+        323
+    </div>
+    <div class="col-sm-2">
+        323
+    </div>
+</div> -->
+
+<!-- <div class="no-gutters">
+    <div class="col-sm-10">
+        <div class="row no-gutters"
+            style="display: flex; flex-direction:row; align-items: center;justify-content: center; padding: 10px;">
+            <div class="col-sm-2 no-gutters">
+                <img class="img-responsive" src="assets/OyeWallet.png">
+            </div>
+            <div class="col-sm-10 header-text">
+                Welcome to OyeWallet Merchant
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-sm-1" >
+                <img class="img-responsive" style="margin-left: -7px;margin-top:30px;" height="50%" src="assets/home_left_side.png">
+            </div>
+            <div class="col-sm-11">
+                <div class="row">
+
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2 align-items-center"
+        style="display:flex; flex-direction: column; align-items: center;justify-content: space-between; min-height: 100vh; ">
+        <div style="display: flex; ">
+            <img class="img-responsive" src="assets/home_side_img.png">
+        </div>
+        <div style="display: flex; flex: 1;align-items: center;justify-content: center;">
+            <img class="img-responsive" src="assets/home_side.png">
+        </div>
+    </div>
+   
+</div> -->

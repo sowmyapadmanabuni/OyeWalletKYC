@@ -1,5 +1,18 @@
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+a {
+    color: $login_title_primary_color ;
+    &:hover{
+        color: $login_txt_primary_strong_color; 
+    };
+    &:active{
+        color: $login_txt_primary_strong_color;
+    }
+}
 
 input[type="text"],
 select.form-control {
@@ -18,16 +31,183 @@ select.form-control:focus {
   box-shadow: none;
   width: 100%;
 }
+.login{
+    &__container {
+        background: url('../../assets/login_img_new.png'); 
+        background-repeat:no-repeat ;
+        background-position: left bottom;
+        min-height: 100vh;
+        background-size: 400px;
+        @include media-breakpoint-only(xs) { background-size: 250px; }
+        @include media-breakpoint-only(sm) { background-size: 350px; }
+        @include media-breakpoint-only(md) { background-size: 400px; }
+        @include media-breakpoint-only(lg) { background-size: 500px; }
+        @include media-breakpoint-only(xl) { background-size: 600px; }
+    };
 
-.logo-txt{
+    &__logo{
+        padding: 20px 0px;
+        @include media-breakpoint-down(sm) { justify-content: center; }
 
+    }
+    &__box-container {
+        @include flex-container(row, flex-start, space-around);
+        // flex-wrap: wrap;
+        margin-top: 20px;
+        @include media-breakpoint-down(sm) { 
+            @include flex-container(column, center, space-around);
+            margin-top: 10px;
+         }
+    }
+    &__title-txt {
+        @include font-group($login_header_txt_fontfamily,$login_title_primary_color,$login_title_txt_fontsize, $login_title_txt_fontweight);
+        // margin: 20px 0px 10px 0px;
+        @include media-breakpoint-down(sm) { font-size:36px }
+    }
+    &__form {
+        @include flex-container(column, center, center);
+        @include card-shadow;
+        @include media-breakpoint-down(sm) { margin-top: 5px; }
+        background: white;
+        padding:55px 40px 30px 40px;
+        &__header-txt {
+            // @include flex-container(row, center, center);
+            @include font-group($login_header_txt_fontfamily,$login_box_title_color,$login_box_header_txt_fontsize, $login_box_header_txt_fontweight);
+        }
+        &__mobileno-input {
+            @include flex-container(row, baseline, space-between);
+            margin: 50px 0px 10px 0px;
+            width: 100%;
+        }
+        &__otp-input{
+            @include flex-container(row, center, flex-start)
+        }
+        &__btn {
+            border-radius: 20px;
+            background: $login_page_buttons_bgcolor;
+            opacity:1;
+            border-color:$login_page_buttons_border_color;
+            padding: 4px 15px;
+            min-width: 90px;
+            @mixin btnStyle {
+                background-color: $login_page_buttons_border_color;
+                border-color: $login_page_buttons_bgcolor;
+            }
+            &:hover{
+                @include btnStyle;
+                cursor: default;
+            };
+            &:focus{
+                @include btnStyle;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                outline: none;
+            }
+        }
+       
+    }
+    &__warning_txt{
+        color: $warning_txt_color ;
+    }
+    &__success_txt{
+        color: $login_title_primary_color;//$success_txt_color ;
+    }
+    &__otp_call_txt{
+        @include flex-container(row, center, space-between);
+        margin-top: 4px;
+        color: $login_txt_secondary_color ;
+    }
+        
 }
-.first-column{
-
-}
-.login-box-column{
-
-}
 
 
+
+// .login-container {
+//     font-family: $login_other_txt_fontfamily;
+// }
+
+
+// .first-column {
+//     @include flex-container(column, flex-start, flex-start);
+//     min-height: 100vh;
+//     padding: 10px 5px 5px 2px;
+
+//     &__header-txt {
+//         @include flex-container(row, center, center);
+//         @include font-group($login_header_txt_fontfamily,$login_title_primary_color,$login_title_txt_fontsize, $login_title_txt_fontweight);
+//         width: 100%;
+//         margin: 20px 0px 10px 0px;
+//     }
+//     &__image-container {
+//         @include flex-container(column, flex-end, flex-end);
+//         flex:1;
+//     }
+// }
+
+// .login{
+//     &__container {
+//         @include flex-container(column, center, center);
+//         @include card-shadow;
+//         padding:60px 40px 30px 40px;
+//         margin-top: 40px; 
+//     }
+//     &__header-txt {
+//         @include flex-container(row, center, center);
+//         @include font-group($login_header_txt_fontfamily,$login_box_title_color,$login_box_header_txt_fontsize, $login_box_header_txt_fontweight);
+//     }
+//     &__first-input-row {
+//         @include flex-container(row, baseline, space-between);
+// 		margin: 50px 0px 10px 0px;
+// 		width: 100%;
+//     }
+//     &__btn {
+//         border-radius: 20px;
+//         background: $login_page_buttons_bgcolor;
+//         opacity:1;
+//         border-color:$login_page_buttons_border_color;
+//         padding: 4px 15px;
+//         min-width: 90px;
+//         @mixin btnStyle {
+//             background-color: $login_page_buttons_border_color;
+//             border-color: $login_page_buttons_bgcolor;
+//         }
+//         &:hover{
+//            @include btnStyle;
+//             cursor: default;
+//         };
+//         &:focus{
+//             @include btnStyle;
+//             -webkit-box-shadow: none;
+//             box-shadow: none;
+//             outline: none;
+//         }
+//     }
+// }
+// .otp_call_txt{
+//     @include flex-container(row, center, space-between);
+//     margin-top: 4px;
+//     color: $login_txt_secondary_color ;
+// }
+
+// :host::ng-deep .iti{
+//     width:100% !important;
+// }
+// :host::ng-deep .form-group{
+//     width:100% !important;
+// }
+
+    // warnign box styles
+    // display: flex;
+    // /* margin-bottom: -10px; */
+    // /* flex: 1; */
+    // background-color: burlywood;
+    // width: 93%;
+    // justify-content: center;
+    // align-items: center;
+    // /* margin: 30px 0px 0px 0px; */
+    // position: absolute;
+    // bottom: 0px;
+    // padding: 8px;
+    // border-bottom-right-radius: 20px;
+    // border-bottom-left-radius: 20px;
 

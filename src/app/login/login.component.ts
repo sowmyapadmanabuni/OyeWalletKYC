@@ -17,9 +17,13 @@ export class LoginComponent implements OnInit {
   enable: boolean = false;
   dialCode: string = "";
   mobileNumberWithDialCode = ""
+  timerId;
+  notificationMessageToggle: boolean;
 
   @ViewChild('get_otp_btn', { static: false }) getOtpBtnRef: ElementRef;
   @ViewChild('countdown_timer', { static: false }) countDownTimerRef: ElementRef;
+  @ViewChild('notification_message_container', { static: false }) notificationMsgContainerRef: ElementRef;
+
   constructor(private router: Router, private otpService: OTPService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -36,31 +40,35 @@ export class LoginComponent implements OnInit {
         this.disableGetINButton = true;
         this.showToast();
         this.startCountDownTimer();
-
+        this.showNotificationMessage("OTP has been sent", 'info')
       }
     }, error => {
       console.log("getOTP()", error)
     })
     // this.startCountDownTimer();
     // this.disableGetINButton = true;
+    // this.showNotificationMessage("OTP has been sent", 'info')
   }
   getIN() { //verify OTP
     console.log("verifyOTP()")
+    this.stopCountDownTimer();
+    this.disableGetINButton = false;
     this.otpService.verifyOTP({
       mobileNumber: this.mobileNumberWithDialCode || `${this.dialCode}${this.mobileNumber}`,
       otpNumber: this.otp
     }).subscribe((res: any) => {
       console.log("verify-res", res)
-      if (res && res.data && res.data.account) {
+      if (res && res.success && res.data && res.data.account) {
         this.authService.saveToken(res.data.account.acAccntID);
         this.router.navigate(['/home'])
       } else {
+        let notificationMessage = res && !res.success && res.data ? res.data.errorMessage : "Something failed"
+        this.showNotificationMessage(notificationMessage, 'error')
 
       }
     }, error => {
       console.log("getIN()", error)
     })
-
   }
 
   resendOTP(e) {
@@ -88,15 +96,30 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  showNotificationMessage(message, messageType) {
+    let messageDivRef = <HTMLDivElement>this.notificationMsgContainerRef.nativeElement;
+    messageDivRef.innerHTML = message;
+    messageDivRef.style.display = "flex";
+    if (messageType == 'info') {
+      this.notificationMessageToggle = true;
+      setTimeout(() => { this.hideNotificationMessage() }, 3000)
+    } else if (messageType == 'error') {
+      this.notificationMessageToggle = false;
+    }
+  }
+  hideNotificationMessage() {
+    let messageDivRef = <HTMLDivElement>this.notificationMsgContainerRef.nativeElement;
+    messageDivRef.style.display = "none";
+  }
   startCountDownTimer() {
     let timeLeft = 30;
     let countdownTimerElement = <HTMLDivElement>this.countDownTimerRef.nativeElement;
     let getOTPBtnElementRef = <HTMLInputElement>this.getOtpBtnRef.nativeElement;
 
-    let timerId = setInterval(() => {
+    this.timerId = setInterval(() => {
 
       if (timeLeft == 0) {
-        clearInterval(timerId);
+        clearInterval(this.timerId);
         if (getOTPBtnElementRef.value != null) {
           getOTPBtnElementRef.disabled = false;
           getOTPBtnElementRef.value = "Resend";
@@ -104,11 +127,11 @@ export class LoginComponent implements OnInit {
         // doSomething();
       } else {
         getOTPBtnElementRef.disabled = true;
-        countdownTimerElement.innerHTML = timeLeft - 1 + ' seconds to resend';
+        countdownTimerElement.innerHTML = `Resend in ${timeLeft - 1} secs`;
         countdownTimerElement.style.display = "flex";
         timeLeft--;
         if (timeLeft == 0) {
-          clearInterval(timerId);
+          clearInterval(this.timerId);
           if (getOTPBtnElementRef.value != null) {
             getOTPBtnElementRef.disabled = false;
             getOTPBtnElementRef.value = "Resend";
@@ -117,6 +140,12 @@ export class LoginComponent implements OnInit {
         }
       }
     }, 1000);
+  }
+
+  stopCountDownTimer() {
+    clearInterval(this.timerId);
+    let countdownTimerElement = <HTMLDivElement>this.countDownTimerRef.nativeElement;
+    countdownTimerElement.style.display = "none";
   }
   showToast() {
     // let x = document.getElementById("snackbar");
