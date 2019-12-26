@@ -7,6 +7,7 @@
 # Only exists if Bazel was run
 /bazel-out
 /logs
+.eslintrc.json
 
 # dependencies
 /node_modules
@@ -45,3 +46,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+

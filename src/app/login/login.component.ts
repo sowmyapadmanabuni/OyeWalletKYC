@@ -58,8 +58,9 @@ export class LoginComponent implements OnInit {
       otpNumber: this.otp
     }).subscribe((res: any) => {
       console.log("verify-res", res)
-      if (res && res.success && res.data && res.data.account) {
-        this.authService.saveToken(res.data.account.acAccntID);
+      // if (res && res.success && res.data && res.data.account) {
+      if (res && res.success) {
+        this.authService.saveToken("true");
         this.router.navigate(['/home'])
       } else {
         let notificationMessage = res && !res.success && res.data ? res.data.errorMessage : "Something failed"

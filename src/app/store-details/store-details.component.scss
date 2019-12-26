@@ -5,6 +5,27 @@
 @import '~bootstrap/scss/mixins';
 
 
+.details {
+  &__container {
+    display:flex;
+    flex-direction:column;
+    min-height : 100vh;
+  }
+  &__title_bar{
+    margin-top: 10px;
+  }
+  &__sub_container{
+    flex: 1;
+  }
+  &__content_box{
+    margin-top:20px; 
+    margin-bottom: 50px;
+  }
+  &__image_style{
+    margin-right: 15px; border-radius: 4px;
+  }
+}
+
 .no-gutters {
    @include no-gutters;
 }
@@ -24,14 +45,19 @@ tr{
     height:70px;     
 } 
 th{
-    @include font-group($secondary_txt_fontfamily,#707070,18px, 400);
-    // text-align: center;
+    @include font-group($secondary_txt_fontfamily,$txt_primary_color,16px, 400);
+    text-align: center;
 }
 td{
-    @include font-group($secondary_txt_fontfamily,#000000,16px, 400);
+    @include font-group($secondary_txt_fontfamily,#000000,14px, 400);
+    text-align: center;
 }
 .left_bar_img{
-  height:86vh;
+  // height:86vh;
+  position: absolute;
+  bottom: 2px;
+  width: 60%;
+  height: 97%;
 };
 .title_container{
   @include flex-container(row, center, flex-start);
@@ -54,4 +80,11 @@ td{
 .button_group {
   @include flex-container(row, center, center);
   margin-top: 40px;
+  margin-bottom: 20px;
+}
+.text-approved{
+  color: green;
+}
+.text-rejected{
+  color: red;
 }

@@ -1,67 +1,212 @@
-<div class="container-fluid no-gutters">
-    <div style="margin-top: 20px;">
+<div class="container-fluid no-gutters details__container" >
+    <div class="details__title_bar">
         <img class="img-responsive" src="assets/OyeWallet.png">
     </div>
-    <div class="row no-gutters">
-        <div class="col-sm-1 d-none d-sm-block no-gutters" style="margin-top: 20px;">
+    <div class="row no-gutters details__sub_container">
+        <div class="col-sm-1 d-none d-sm-block no-gutters">
             <img class="img-responsive left_bar_img" src="assets/home_left_side.png">
         </div>
         <div class="col-sm-10 col-xs-12 no-gutters">
             <div class="row no-gutters">
                 <div class="title_container">
                     <img class="img-responsive" src="assets/home_bag.png">
-                    <div class="header-text">
-                        Cafe N Cakes</div>
+                    <div class="header-text">Cafe N Cakes</div>
                     <div class="status-text-box">
-                        Status - <div class="status_txt">{{storeStatus}}</div>
+                        Status: <div class="status_txt">&nbsp;{{storeStatus}}</div>
                     </div>
                 </div>
                 <div>
                 </div>
             </div>
-            <div class="row no-gutters" style="margin-top:20px">
+            <div class="row no-gutters details__content_box">
                 <div class="card-shadow">
                     <div>
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 5%;">
+                                    <th scope="col" style="width: 2%;">
+                                        <!-- style="width: 20%;" -->
+                                        <!-- <label style="margin-bottom:0px"> -->
                                         <input type="checkbox" (change)="CheckAllOptions(this)">
+                                        <!-- Select All -->
+                                        <!-- </label> -->
                                     </th>
-                                    <th scope="col" style="width: 40%;">
-                                        Select All
-                                    </th>
-                                    <th scope="col" style="width: 55%;"></th>
+                                    <th scope="col" style="width: 20%;">Document Type</th>
+                                    <th scope="col" style="width: 30%;">Details</th>
+                                    <th scope="col" style="width: 28%;">Image</th>
+                                    <th scope="col" style="width: 20%;">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <!-- <tr *ngFor="let document of documentList">
                                     <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
                                     </td>
-                                    <td class="store_name_style align-middle">xyz</td>
+                                    <td class="store_name_style align-middle">{{document.documentType}}</td>
                                     <td class="store_name_style align-middle">Mark</td>
-                                </tr>
-                                <tr>
+                                    <td>
+                                        <div>
+                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                                value="Approve">
+                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
+                                                value="Reject">
+                                        </div>
+                                    </td>
+                                </tr> -->
+                                <tr *ngIf="storeDetails.panDetails">
                                     <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
                                     </td>
-                                    <td class="store_name_style align-middle">xyz</td>
-                                    <td class="store_name_style align-middle">Mark</td>
+                                    <td class="store_name_style align-middle">PAN</td>
+                                    <td class="store_name_style align-middle">{{storeDetails.panDetails.panNumber}}</td>
+                                    <td class="store_name_style align-middle">
+                                        <img class="details__image_style" [src]="testImageUrl_1" 
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img class="details__image_style" [src]="testImageUrl_1"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                    </td>
+                                    <td class="align-middle">
+                                        <div *ngIf="!showPanStatus; else elseBlock">
+                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                                value="Approve" (click)="approve('pan-approve')">
+                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
+                                                value="Reject" (click)="reject('pan-reject')">
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <div
+                                                [ngClass]="{'text-approved':isPanApproved,'text-rejected':!isPanApproved}">
+                                                {{isPanApproved?'APPROVED':'REJECTED'}}</div>
+                                        </ng-template>
+                                    </td>
                                 </tr>
-                                <tr>
+                                <tr *ngIf="storeDetails.localityDetails">
                                     <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
                                     </td>
-                                    <td class="store_name_style align-middle">xyz</td>
-                                    <td class="store_name_style align-middle">Mark</td>
+                                    <td class="store_name_style align-middle">Address</td>
+                                    <td class="store_name_style align-middle">
+                                        <div style="display: flex; flex-direction: column;">
+                                            <span>{{storeDetails.localityDetails.address}}</span>
+                                            <span>{{storeDetails.localityDetails.city}}</span>
+                                            <span>{{storeDetails.localityDetails.state}}</span>
+                                            <span>{{storeDetails.localityDetails.pinCode}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="store_name_style align-middle">
+                                        <img class="details__image_style" [src]="testImageUrl_1"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img class="details__image_style" [src]="testImageUrl_1" 
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                    </td>
+                                    <td class="align-middle">
+                                        <div *ngIf="!showAddressStatus; else elseBlock">
+                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                                value="Approve" (click)="approve('address-approve')">
+                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
+                                                value="Reject" (click)="reject('address-reject')">
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <div
+                                                [ngClass]="{'text-approved':isAddressApproved,'text-rejected':!isAddressApproved}">
+                                                {{isAddressApproved?'APPROVED':'REJECTED'}}</div>
+                                        </ng-template>
+                                    </td>
                                 </tr>
+                                <tr *ngIf="storeDetails.aadharDetails">
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="checkOption(this)">
+                                    </td>
+                                    <td class="store_name_style align-middle">Aadhar</td>
+                                    <td class="store_name_style align-middle">
+                                        {{storeDetails.aadharDetails.udyogAadharNo}}</td>
+                                    <td class="store_name_style align-middle">
+                                        <img [src]="testImageUrl_1" class="details__image_style"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                    </td>
+                                    <td class="align-middle">
+                                        <div *ngIf="!showAadharStatus; else elseBlock">
+                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                                value="Approve" (click)="approve('aadhar-approve')">
+                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
+                                                value="Reject" (click)="reject('aadhar-reject')">
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <div
+                                                [ngClass]="{'text-approved':isAadharApproved,'text-rejected':!isAadharApproved}">
+                                                {{isAadharApproved?'APPROVED':'REJECTED'}}</div>
+                                        </ng-template>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="storeDetails.bankDetails">
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="checkOption(this)">
+                                    </td>
+                                    <td class="store_name_style align-middle">Bank Details</td>
+                                    <td class="store_name_style align-middle">
+                                        <div style="display: flex; flex-direction: column;">
+                                            <span>{{storeDetails.bankDetails.payeeName}}</span>
+                                            <span>{{storeDetails.bankDetails.accountNumber}}</span>
+                                            <span>{{storeDetails.bankDetails.ifscCode}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="store_name_style align-middle">
+                                        <img [src]="testImageUrl_1" class="details__image_style"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                    </td>
+                                    <td class="align-middle">
+                                        <div *ngIf="!showBankDetailStatus; else elseBlock">
+                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                                value="Approve" (click)="approve('bank-approve')">
+                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
+                                                value="Reject" (click)="reject('bank-reject')">
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <div
+                                                [ngClass]="{'text-approved':isBankDetailsApproved,'text-rejected':!isBankDetailsApproved}">
+                                                {{isBankDetailsApproved?'APPROVED':'REJECTED'}}</div>
+                                        </ng-template>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="storeDetails.chequeDetails">
+                                    <td class="align-middle">
+                                        <input type="checkbox" (change)="checkOption(this)">
+                                    </td>
+                                    <td class="store_name_style align-middle">Cheque</td>
+                                    <td class="store_name_style align-middle">
+                                        {{storeDetails.chequeDetails.udyogAadharNo}}</td>
+                                    <td class="store_name_style align-middle">
+                                        <img [src]="testImageUrl_1" class="details__image_style"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style"
+                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                    </td>
+                                    <td class="align-middle">
+                                        <div *ngIf="!showChequeDetailStatus; else elseBlock">
+                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                                value="Approve" (click)="approve('cheque-approve')">
+                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
+                                                value="Reject" (click)="reject('cheque-reject')">
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <div
+                                                [ngClass]="{'text-approved':isChequeDetailsApproved,'text-rejected':!isChequeDetailsApproved}">
+                                                {{isChequeDetailsApproved?'APPROVED':'REJECTED'}}</div>
+                                        </ng-template>
+                                    </td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
                     <div class="button_group">
-                        <input type='button' style="margin-right: 5px;" class="btn btn-info" value="Approve">
-                        <input type='button' style="margin-left: 5px;" class="btn btn-danger" value="Reject">
+                        <input type='button' style="margin-right: 5px;" class="btn btn-info" value="Submit">
+                        <input type='button' style="margin-right: 5px;" class="btn btn-danger" value="Cancel"
+                            (click)="goBack()">
                     </div>
                 </div>
             </div>

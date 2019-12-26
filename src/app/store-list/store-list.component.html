@@ -1,0 +1,205 @@
+<div class="container-fluid home__container img-responsive no-gutters">
+    <div class="row align-items-center no-gutters">
+        <div class="col-sm-2" style="margin-top: 10px;">
+            <img class="img-responsive" src="assets/OyeWallet.png">
+        </div>
+        <div class="col-sm-8 home__header-title">
+            Welcome to OyeWallet KYC
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row no-gutters" style="flex: 1;">
+        <div class="d-none d-sm-block col-sm-1">
+            <img class="img-responsive home__left_bar_img" style="margin-top: 20px;" src="assets/home_left_side.png">
+        </div>
+        <div class="col-xs-12 col-sm-11">
+            <div class="row no-gutters align-items-end" style="margin-top: 2px;">
+                <img class="img-responsive" src="assets/home_bag.png" width="56" height="56">
+                <div class="home__secondary_title">Shop List</div>
+                <div class="home__line"></div>
+            </div>
+
+            <div class="row no-gutters">
+                <div class="col-sm-9 col-xs-12 no-gutters">
+                    <div
+                        style="display: flex;flex-direction: row;align-items: center;justify-content:space-between; margin: 30px 0px 15px 0px;">
+                        <div style="width: 50%;">
+                            <input style="border-radius: 20px; padding-left: 25px;" type="text" [(ngModel)]="searchTxt"
+                                class="form-control" name="searchTxt" placeholder="Search">
+                        </div>
+                        <div style="width: 20%;">
+                            <div class="btn-group" style="width: 100%;">
+                                <button class="btn btn-sm dropdown-toggle"
+                                    style="border-color:#ced4da; padding-left: 20px ;padding-right: 20px;" type="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Filter
+                                </button>
+                                <div class="dropdown-menu" (click)="$event.stopPropagation()">
+                                    <label class="checkbox dropdown-item" title="Select All"><input type="checkbox"
+                                            value="Select All" [checked]="status" 
+                                            (change)="status=!status;pstatus=rstatus=astatus=status;groupBy($event, 'All', status)">
+                                        Select All</label>
+                                    <div class="dropdown-divider"></div>
+                                    <label class="checkbox dropdown-item" title="Pending">
+                                        <input type="checkbox" value="Pending" [checked]="status||pstatus"
+                                            (change)="pstatus=!pstatus;status&&status=!status;groupBy($event,'Pending', pstatus)">
+                                        Pending</label>
+                                    <label class="checkbox dropdown-item" title="Rejected">
+                                        <input type="checkbox" value="Rejected" [checked]="status||rstatus"
+                                            (change)="rstatus=!rstatus;status&&status=!status;groupBy($event,'Rejected', rstatus)">
+                                        Rejected</label>
+                                    <label class="checkbox dropdown-item" title="Approved">
+                                        <input type="checkbox" value="Approved" [checked]="status||astatus"
+                                            (change)="astatus=!astatus;status&&status=!status;groupBy($event,'Approved', astatus)">
+                                        Approved</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-borderless"
+                            [mfData]="filteredStoreList | search:['brandName', 'registrationName']:searchTxt" #mf="mfDataTable"
+                            [mfRowsOnPage]="10">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 33%;">
+                                        <mfDefaultSorter by="brandName">Shop Name</mfDefaultSorter>
+                                    </th>
+                                    <th scope="col" style="width: 33%;">
+                                        <mfDefaultSorter by="registrationName">Merchant Name</mfDefaultSorter>
+                                    </th>
+                                    <th scope="col" style="width: 33%;">Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let store of mf.data; let i = index">
+                                    <td class="store_name_style">
+                                        <a routerLink="/stores/{{store.storeDetailsID}}" [state]='store'>
+                                            <span>{{store?.brandName}}-{{store?.storeDetailsID}}</span>
+                                        </a>
+                                        <!-- <a (click)="gotoStoreDetails(store)">{{store?.brandName}}-{{store.id}}</a> -->
+                                    </td>
+                                    <td>{{store?.registrationName}}</td>
+                                    <td>{{store?.registration?.storeStatus}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <!-- <tr> -->
+                                <!-- <td colspan="3"> -->
+                                <td></td>
+                                <td style="display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: center;">
+                                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                                </td>
+                                <td></td>
+                                <!-- <mfBootstrapPaginator [rowsOnPageSet]="[5,10]"></mfBootstrapPaginator> -->
+                                <!-- </td> -->
+                                <!-- </tr> -->
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="col-sm-3 col no-gutters home__right_side_img">
+                    <img class="img-responsive" style="width: 80%;" src="assets/home_side.png">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- <div class="container-fluid home__container img-responsive  no-gutters">
+    <div class="row align-items-center no-gutters">
+        <div class="col-sm-2" style="margin-top: 20px;">
+            <img class="img-responsive" src="assets/OyeWallet.png">
+        </div>
+        <div class="col-sm-8 header-text">
+            Welcome to OyeWallet Merchant
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-11">
+            <div class="row no-gutters" style="background-color: aqua; min-height: 100px;"></div>
+            <div class="row no-gutters"  style="display: flex; flex-direction: row; align-items: center; justify-content: center;min-height: 100%;">
+                <div class="col-sm-9" style="background-color: rebeccapurple; min-height: 300px; ">
+
+                </div>
+                <div class="col-sm-3"
+                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+
+                    <img class="img-responsive" width=80% src="assets/home_side.png">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+<!-- <div class="row">
+    <div class="col-sm-2">
+        <img class="img-responsive" src="assets/OyeWallet.png">
+    </div>
+    <div class="col-sm-10">
+        Welcome to OyeWallet Merchant
+        <img class="img-responsive" style="position: absolute;z-index: -1;top: 0;right: 0;width: 200px;" src="assets/home_side_img.png">
+    </div>
+   
+</div>
+<div class="row">
+    <div class="col-sm-1" style="background:url('../../assets/home_left_side.png');background-size: contain;
+    background-position: left;
+    height: 500px;
+    background-repeat: no-repeat;">
+    
+    </div>
+    <div class="col-sm-9">
+        323
+    </div>
+    <div class="col-sm-2">
+        323
+    </div>
+</div> -->
+
+<!-- <div class="no-gutters">
+    <div class="col-sm-10">
+        <div class="row no-gutters"
+            style="display: flex; flex-direction:row; align-items: center;justify-content: center; padding: 10px;">
+            <div class="col-sm-2 no-gutters">
+                <img class="img-responsive" src="assets/OyeWallet.png">
+            </div>
+            <div class="col-sm-10 header-text">
+                Welcome to OyeWallet Merchant
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-sm-1" >
+                <img class="img-responsive" style="margin-left: -7px;margin-top:30px;" height="50%" src="assets/home_left_side.png">
+            </div>
+            <div class="col-sm-11">
+                <div class="row">
+
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2 align-items-center"
+        style="display:flex; flex-direction: column; align-items: center;justify-content: space-between; min-height: 100vh; ">
+        <div style="display: flex; ">
+            <img class="img-responsive" src="assets/home_side_img.png">
+        </div>
+        <div style="display: flex; flex: 1;align-items: center;justify-content: center;">
+            <img class="img-responsive" src="assets/home_side.png">
+        </div>
+    </div>
+   
+</div> -->

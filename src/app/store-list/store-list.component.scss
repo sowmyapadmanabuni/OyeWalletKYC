@@ -1,0 +1,208 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+
+.no-gutters {
+  @include no-gutters;
+}
+.home{
+    &__container {
+      display: flex;
+      flex-direction: column;
+      background: url('../../assets/home_side_img.png');
+      background-repeat:no-repeat ;
+      background-position: right top;
+      min-height: 100vh;
+      background-size: 270px;
+      @include media-breakpoint-only(xs) { background-size: 150px }
+      @include media-breakpoint-only(sm) { background-size: 200px;}
+      @include media-breakpoint-only(md) { background-size: 270px; }
+      @include media-breakpoint-only(lg) { background-size: 270px; }
+      @include media-breakpoint-only(xl) { background-size: 290px; }
+    };
+
+    &__header-title {
+      @include flex-container(row, center, center);
+      @include font-group($header_txt_fontfamily,$home_title_primary_color,$home_title_txt_fontsize, $home_title_txt_fontweight);
+      padding-left:-20px;
+      text-align: center;
+      @include media-breakpoint-down(md) { font-size: $mobile_header_txt_fontsize;}
+    };
+
+    &__left_bar_img{
+      // height:86vh;
+      position: absolute;
+      bottom: 2px;
+      width: 60%;
+      height: 97%;
+    };
+
+    &__secondary_title {
+      @include font-group($header_txt_fontfamily,#000000,22px, 400);
+    };
+
+    &__line {
+      @include line(1.2px, 0.85, 0px 0px 10px 20px, #ced4da)
+    };
+
+    &__right_side_img {
+      min-height: 72vh;
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+    }
+}
+
+th{
+  @include font-group($header_txt_fontfamily,$txt_primary_color,16px, 500);
+  text-align: center;
+}
+tr{
+  border-style: none none dashed none;
+  border-width: thin;
+  // padding: 15px;
+}
+td{
+  @include font-group($header_txt_fontfamily,#000000,14px, 450);
+  text-align: center;
+  // border-style: none none dashed none;
+  // border-width: thin;
+}
+table{
+  margin-bottom: 0px;
+}
+
+.store_name_style {
+  @include font-group($header_txt_fontfamily,#3D08FF,14px, 500);
+  
+}
+.store_name_style:hover{
+  cursor: pointer;
+}
+// :host::ng-deep .pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 2px 2px;  text-align: center; }
+
+
+
+// *,
+// *:after,
+// *:before {
+//   box-sizing: border-box;
+// }
+// ul {
+//   margin: 0;
+//   padding: 0;
+// }
+// :host::ng-deep .pagination > li {
+//   overflow: hidden;
+//   position: relative;
+//   margin-top: 25px;
+//   width: 25%;
+//   float: left;
+//   list-style: none;
+//   padding: 0;
+// }
+// :host::ng-deep .pagination > li p {
+//   color: #000;
+//   line-height: 1;
+// }
+// :host::ng-deep .pagination > li > a {
+//   line-height: 50px;
+//   text-decoration: none;
+//   color: #000;
+//   display: block;
+//   text-align: center;
+//   position: relative;
+// }
+// /*positon the circle*/
+
+// :host::ng-deep .pagination > li > a:before {
+//   content: '';
+//   position: absolute;
+//   z-index: -1;
+//   width: 50px;
+//   height: 50px;
+//   left: 50%;
+//   margin-left: -25px;
+//   border-radius: 100%;
+//   border: 1px solid blue;
+//   transition: all .2s;
+// }
+// /*positioning the line*/
+
+// :host::ng-deep .pagination > li:not(:last-of-type):after,
+// :host::ng-deep .pagination > li:not(:first-of-type):before {
+//   content: '';
+//   position: absolute;
+//   background: blue;
+//   top: 25px;
+//   height: 1px;
+// }
+// :host::ng-deep .pagination > li:first-of-type:after {
+//   left: 50%;
+//   right: 0;
+//   margin-left: 25px;
+// }
+// :host::ng-deep .pagination > li:not(:first-of-type):before {
+//   left: 0;
+//   right: 50%;
+//   margin-right: 25px;
+// }
+// :host::ng-deep .pagination > li:not(:first-of-type):after {
+//   right: 0;
+//   left: 50%;
+//   margin-left: 25px;
+// }
+// :host::ng-deep .pagination .page-item{
+//   background: $txt_primary_color !important;
+//   border: transparent !important;
+//   border-radius: 20px !important;
+//   text-align: center;
+// }
+
+
+// :host::ng-deep .ngx-pagination {
+//   padding-left: 0px !important;
+// }
+
+// :host::ng-deep .ngx-pagination .current,
+// .btn-info {
+//   background: $txt_primary_color !important;
+//   border: transparent !important;
+//   border-radius: 20px !important;
+//   text-align: center;
+// }
+
+// :host::ng-deep .ngx-pagination .current:hover {
+//   background: $txt_primary_strong_color !important;
+//   border-radius: 20px !important; 
+//   border: transparent !important;
+// }
+// :host::ng-deep .ngx-pagination a, .ngx-pagination button{
+//   border-radius: 20px !important; 
+// }
+
+
+
+// :host::ng-deep .ngx-pagination .current {
+//   background: rgb(131, 131, 131);
+//   border-radius: 4px;
+//   padding-left: 9px;
+//   padding-right: 9px;
+// }
+
+// :host::ng-deep .ngx-pagination a:hover, .ngx-pagination button:hover {
+//   background: #d4d4d4;
+//   border-radius: 3px;
+//   padding-left: 9px;
+//   padding-right: 9px;
+//   text-decoration: none;
+// }
+
+:host::ng-deep .ngx-pagination a:focus, .ngx-pagination button:focus {
+  outline: none;
+  background: $txt_primary_strong_color !important;
+}
+

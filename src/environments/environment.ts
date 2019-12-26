@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // API_HOST:'http://apiuat.oyespace.com'
-  API_HOST:'http://devapi.oyewallet.com'
+  API_HOST: 'http://devapi.oyewallet.com',
+  MEDIA_HOST: 'http://mediauploaddev.oyespace.com/Images'
 };
 
 /*
