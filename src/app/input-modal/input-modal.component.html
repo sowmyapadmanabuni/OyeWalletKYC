@@ -1,0 +1,37 @@
+<button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#exampleModalCenter'+modalId">
+    {{btnText}}
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter{{modalId}}" tabindex="-1" role="dialog"
+    aria-labelledby="modalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">
+                    {{modalTitle}}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display:flex;flex-direction: column; padding: 30px 10px 0px 10px;">
+                    <input placeholder="Please enter reason here..." type="text" maxlength="120"
+                        [(ngModel)]="inputMessage" />
+                    <!-- [ngModel]="inputMessage" (ngModelChange)="valuechange($event)" -->
+                    <!-- [(ngModel)]="inputMessage" -->
+                    <span
+                        style="align-self: flex-end; color:#96989b;">{{(!inputMessage?.length&&'max ')+(120-inputMessage?.length)+(inputMessage?.length?' characters left':'')}}
+                    </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="onClose($event)">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    (click)="onSaveClickEvent($event)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

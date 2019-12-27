@@ -76,7 +76,7 @@ export class StoreListComponent implements OnInit {
 
     if (this.filterList.length) {
       this.filteredStoreList = this.storesList.filter(item => {
-        return this.filterList.includes(item.registration.storeStatus)
+        return this.filterList.includes(item && item.registration && item.registration.storeStatus)
       })
     } else {
       this.filteredStoreList = [];

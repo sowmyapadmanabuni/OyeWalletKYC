@@ -30,7 +30,9 @@ select.form-control:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   width: 100%;
+  outline:none;
 }
+
 .login{
     &__container {
         background: url('../../assets/login_img_new.png'); 

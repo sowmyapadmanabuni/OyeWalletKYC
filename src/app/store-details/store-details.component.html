@@ -1,4 +1,4 @@
-<div class="container-fluid no-gutters details__container" >
+<div class="container-fluid no-gutters details__container">
     <div class="details__title_bar">
         <img class="img-responsive" src="assets/OyeWallet.png">
     </div>
@@ -39,21 +39,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngFor="let document of documentList">
-                                    <td class="align-middle">
-                                        <input type="checkbox" (change)="checkOption(this)">
-                                    </td>
-                                    <td class="store_name_style align-middle">{{document.documentType}}</td>
-                                    <td class="store_name_style align-middle">Mark</td>
-                                    <td>
-                                        <div>
-                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
-                                                value="Approve">
-                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
-                                                value="Reject">
-                                        </div>
-                                    </td>
-                                </tr> -->
                                 <tr *ngIf="storeDetails.panDetails">
                                     <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
@@ -61,22 +46,31 @@
                                     <td class="store_name_style align-middle">PAN</td>
                                     <td class="store_name_style align-middle">{{storeDetails.panDetails.panNumber}}</td>
                                     <td class="store_name_style align-middle">
-                                        <img class="details__image_style" [src]="testImageUrl_1" 
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
-                                        <img class="details__image_style" [src]="testImageUrl_1"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showPanStatus; else elseBlock">
-                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                            <input type='button' style="margin: 4px;" class="btn btn-info"
                                                 value="Approve" (click)="approve('pan-approve')">
-                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
-                                                value="Reject" (click)="reject('pan-reject')">
+                                            <app-input-modal [displayBtnText]="rejectBtnText"
+                                                [modalTitle]="rejectModalTitle" modalId="1"
+                                                (onSave)="reject($event, 'pan-reject')" (onCancel)="$event">
+                                            </app-input-modal>
                                         </div>
                                         <ng-template #elseBlock>
                                             <div
                                                 [ngClass]="{'text-approved':isPanApproved,'text-rejected':!isPanApproved}">
-                                                {{isPanApproved?'APPROVED':'REJECTED'}}</div>
+                                                <div *ngIf="isPanApproved; else rejectBlock">
+                                                    APPROVED
+                                                </div>
+                                                <ng-template #rejectBlock>
+                                                    <div>REJECTED</div>
+                                                    <div>Reason: {{panRejectionReason}}</div>
+                                                </ng-template>
+                                            </div>
                                         </ng-template>
                                     </td>
                                 </tr>
@@ -94,22 +88,31 @@
                                         </div>
                                     </td>
                                     <td class="store_name_style align-middle">
-                                        <img class="details__image_style" [src]="testImageUrl_1"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
-                                        <img class="details__image_style" [src]="testImageUrl_1" 
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showAddressStatus; else elseBlock">
-                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                            <input type='button' style="margin: 4px;" class="btn btn-info"
                                                 value="Approve" (click)="approve('address-approve')">
-                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
-                                                value="Reject" (click)="reject('address-reject')">
+                                            <app-input-modal [displayBtnText]="rejectBtnText"
+                                                [modalTitle]="rejectModalTitle" modalId="2"
+                                                (onSave)="reject($event, 'address-reject')" (onCancel)="$event">
+                                            </app-input-modal>
                                         </div>
                                         <ng-template #elseBlock>
                                             <div
                                                 [ngClass]="{'text-approved':isAddressApproved,'text-rejected':!isAddressApproved}">
-                                                {{isAddressApproved?'APPROVED':'REJECTED'}}</div>
+                                                <div *ngIf="isAddressApproved; else rejectBlock">
+                                                    APPROVED
+                                                </div>
+                                                <ng-template #rejectBlock>
+                                                    <div>REJECTED</div>
+                                                    <div>Reason: {{addressRejectionReason}}</div>
+                                                </ng-template>
+                                            </div>
                                         </ng-template>
                                     </td>
                                 </tr>
@@ -121,22 +124,31 @@
                                     <td class="store_name_style align-middle">
                                         {{storeDetails.aadharDetails.udyogAadharNo}}</td>
                                     <td class="store_name_style align-middle">
-                                        <img [src]="testImageUrl_1" class="details__image_style"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
-                                        <img [src]="testImageUrl_1" class="details__image_style"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showAadharStatus; else elseBlock">
-                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                            <input type='button' style="margin: 4px;" class="btn btn-info"
                                                 value="Approve" (click)="approve('aadhar-approve')">
-                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
-                                                value="Reject" (click)="reject('aadhar-reject')">
+                                            <app-input-modal [displayBtnText]="rejectBtnText"
+                                                [modalTitle]="rejectModalTitle" modalId="3"
+                                                (onSave)="reject($event, 'aadhar-reject')" (onCancel)="$event">
+                                            </app-input-modal>
                                         </div>
                                         <ng-template #elseBlock>
                                             <div
                                                 [ngClass]="{'text-approved':isAadharApproved,'text-rejected':!isAadharApproved}">
-                                                {{isAadharApproved?'APPROVED':'REJECTED'}}</div>
+                                                <div *ngIf="isAadharApproved; else rejectBlock">
+                                                    APPROVED
+                                                </div>
+                                                <ng-template #rejectBlock>
+                                                    <div>REJECTED</div>
+                                                    <div>Reason: {{aadharRejectionReason}}</div>
+                                                </ng-template>
+                                            </div>
                                         </ng-template>
                                     </td>
                                 </tr>
@@ -153,22 +165,31 @@
                                         </div>
                                     </td>
                                     <td class="store_name_style align-middle">
-                                        <img [src]="testImageUrl_1" class="details__image_style"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
-                                        <img [src]="testImageUrl_1" class="details__image_style"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showBankDetailStatus; else elseBlock">
-                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                            <input type='button' style="margin: 4px;" class="btn btn-info"
                                                 value="Approve" (click)="approve('bank-approve')">
-                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
-                                                value="Reject" (click)="reject('bank-reject')">
+                                            <app-input-modal [displayBtnText]="rejectBtnText"
+                                                [modalTitle]="rejectModalTitle" modalId="4"
+                                                (onSave)="reject($event, 'bank-reject')" (onCancel)="$event">
+                                            </app-input-modal>
                                         </div>
                                         <ng-template #elseBlock>
                                             <div
                                                 [ngClass]="{'text-approved':isBankDetailsApproved,'text-rejected':!isBankDetailsApproved}">
-                                                {{isBankDetailsApproved?'APPROVED':'REJECTED'}}</div>
+                                                <div *ngIf="isBankDetailsApproved; else rejectBlock">
+                                                    APPROVED
+                                                </div>
+                                                <ng-template #rejectBlock>
+                                                    <div>REJECTED</div>
+                                                    <div>Reason: {{bankRejectionReason}}</div>
+                                                </ng-template>
+                                            </div>
                                         </ng-template>
                                     </td>
                                 </tr>
@@ -180,22 +201,31 @@
                                     <td class="store_name_style align-middle">
                                         {{storeDetails.chequeDetails.udyogAadharNo}}</td>
                                     <td class="store_name_style align-middle">
-                                        <img [src]="testImageUrl_1" class="details__image_style"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
-                                        <img [src]="testImageUrl_1" class="details__image_style"
-                                            alt="Locality" width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
+                                            width="60px" height="60px" (click)="open(1)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showChequeDetailStatus; else elseBlock">
-                                            <input type='button' style="margin-right: 5px;" class="btn btn-info"
+                                            <input type='button' style="margin: 4px;" class="btn btn-info"
                                                 value="Approve" (click)="approve('cheque-approve')">
-                                            <input type='button' style="margin-left: 5px;" class="btn btn-danger"
-                                                value="Reject" (click)="reject('cheque-reject')">
+                                            <app-input-modal [displayBtnText]="rejectBtnText"
+                                                [modalTitle]="rejectModalTitle" modalId="5"
+                                                (onSave)="reject($event, 'cheque-reject')" (onCancel)="$event">
+                                            </app-input-modal>
                                         </div>
                                         <ng-template #elseBlock>
                                             <div
                                                 [ngClass]="{'text-approved':isChequeDetailsApproved,'text-rejected':!isChequeDetailsApproved}">
-                                                {{isChequeDetailsApproved?'APPROVED':'REJECTED'}}</div>
+                                                <div *ngIf="isChequeDetailsApproved; else rejectBlock">
+                                                    APPROVED
+                                                </div>
+                                                <ng-template #rejectBlock>
+                                                    <div>REJECTED</div>
+                                                    <div>Reason: {{chequeRejectionReason}}</div>
+                                                </ng-template>
+                                            </div>
                                         </ng-template>
                                     </td>
                                 </tr>
@@ -203,8 +233,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="button_group">
-                        <input type='button' style="margin-right: 5px;" class="btn btn-info" value="Submit">
+                    <div class="button_group"
+                        *ngIf="showChequeDetailStatus&&showBankDetailStatus&&showAadharStatus&&showPanStatus&&showAddressStatus">
+                        <input type='button' style="margin-right: 5px;" class="btn btn-info" value="Submit" (click)="onSubmit()">
                         <input type='button' style="margin-right: 5px;" class="btn btn-danger" value="Cancel"
                             (click)="goBack()">
                     </div>

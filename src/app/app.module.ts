@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { LightboxModule } from 'ngx-lightbox';
 import { SearchPipe } from "./utils/search.pipe";
+import { InputModalComponent } from './input-modal/input-modal.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { SearchPipe } from "./utils/search.pipe";
     StoreListComponent,
     CountDownTimerComponent,
     StoreDetailsComponent,
-    SearchPipe
+    SearchPipe,
+    InputModalComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +37,7 @@ import { SearchPipe } from "./utils/search.pipe";
     Ng2TelInputModule,
     NgxPaginationModule,
     DataTableModule,
-    BrowserAnimationsModule,
-    
+    BrowserAnimationsModule,    
     AccordionModule.forRoot(),
     LightboxModule
   ],

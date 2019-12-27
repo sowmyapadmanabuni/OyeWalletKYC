@@ -1,0 +1,52 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+input[type="text"],
+select.form-control {
+  background: transparent;
+  border: none;
+  border-bottom: 1.2px solid  #FFB81A; //rgb(240, 164, 51); ; //F08A33
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+select.form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  outline:none;
+}
+.modal-header, .modal-footer{
+ border: none;
+}
+
+.input-modal{
+    &__btn {
+        border-radius: 20px;
+        background: $login_page_buttons_bgcolor;
+        opacity:1;
+        border-color:$login_page_buttons_border_color;
+        padding: 4px 15px;
+        min-width: 90px;
+        @mixin btnStyle {
+            background-color: $login_page_buttons_border_color;
+            border-color: $login_page_buttons_bgcolor;
+        }
+        &:hover{
+            @include btnStyle;
+            cursor: default;
+        };
+        &:focus{
+            @include btnStyle;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+        }
+    }
+}

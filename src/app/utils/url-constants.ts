@@ -11,3 +11,4 @@ export const OTP_BY_CALL = "";
 
 export const GET_ALL_STORES = `${API_HOST}/wallet/api/v1/ListOfStores`
 export const GET_LIMITED_STORES = `${API_HOST}/wallet/api/v1/ListOfStoresByPage/{PageNo}`
+export const UPDATE_STORE_STATUS = `${API_HOST}/wallet/api/v1/StoreStatusUpdate/{storeID}`
