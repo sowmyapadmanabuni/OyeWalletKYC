@@ -33,6 +33,7 @@
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "./node_modules/ngx-lightbox/lightbox.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles/main.scss"
             ],
             "stylePreprocessorOptions": {

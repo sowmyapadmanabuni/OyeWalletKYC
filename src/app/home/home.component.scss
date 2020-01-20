@@ -1,0 +1,47 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+a{
+    text-decoration: none !important;
+    :hover{
+        color:white;
+        text-decoration:none !important;
+        cursor:pointer;
+    }
+}
+.card-view {
+    width: 250px;
+    height: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+.card-view:hover{
+    background-color: #f7f5f5;
+    cursor: pointer !important;
+}
+div.header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 40px;
+}
+.card-text{
+      text-align: center;
+      font-size: 18px;
+}
+.home{
+    &__container{
+            // display:flex;
+            // flex-direction:row;
+        min-height : 100vh;
+            // min-width: 100vh;
+            // background-color: yellow;
+    }
+}

@@ -1,0 +1,45 @@
+<div>
+    <label for="address_line_1"
+        style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139)">
+        <input class="form-control" type="text" id="address_line_1" name="address_line_1"
+            [(ngModel)]="addressDetails.address_line_1" required>
+        Street Address
+    </label>
+
+    <label for="address_line_2"
+        style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139)">
+        <input class="form-control" type="text" id="address_line_2" name="address_line_2"
+            [(ngModel)]="addressDetails.address_line_2" required>
+        Street Address Line 2
+    </label>
+
+    <div style="display: flex; flex-direction: row;justify-content: space-between;">
+        <label for="city"
+            style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139); width: 45%;">
+            <input class="form-control" type="text" id="city" name="city" [(ngModel)]="addressDetails.city" required>
+            City
+        </label>
+
+        <label for="state"
+            style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139); width:45%;">
+            <input class="form-control" type="text" id="state" name="state" [(ngModel)]="addressDetails.state" required>
+            State
+        </label>
+    </div>
+    <div style="display: flex; flex-direction: row;justify-content: space-between;">
+        <label for="pin"
+            style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139); width: 45%;">
+            <input class="form-control" type="number" id="pin" name="pin" [(ngModel)]="addressDetails.pin" required>
+            PIN / ZIP Code
+        </label>
+
+        <label for="country"
+            style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139); width: 45%;">
+            <input class="form-control" type="text" id="country" name="country" [(ngModel)]="addressDetails.country"
+                required>
+            Country
+        </label>
+    </div>
+
+
+</div>

@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       // if (res && res.success && res.data && res.data.account) {
       if (res && res.success) {
         this.authService.saveToken("true");
-        this.router.navigate(['/home'])
+        this.router.navigate(['/stores'])
       } else {
         let notificationMessage = res && !res.success && res.data ? res.data.errorMessage : "Something failed"
         this.showNotificationMessage(notificationMessage, 'error')

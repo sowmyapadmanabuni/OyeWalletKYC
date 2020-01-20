@@ -1,0 +1,142 @@
+<div class="container-fluid no-gutters viewkyc__container row">
+    <!-- <div class="row no-gutters"> -->
+    <div class="col-sm-6 no-gutters"
+        style="background-color:rgb(243, 241, 241) ; flex: 1; display: flex;padding: 20px; align-items: center; justify-content: center;">
+        <img [src]="panLoction" alt="Locality" height="100%" />
+        <!-- <app-image-viewer [images]="imagesList" 
+        [idContainer]="'idOnHTML'" 
+        [zoomInButton] ="false"
+        [resetZoom]="false"
+        [zoomOutButton]="false"
+        [showPDFOnlyOption]="false"
+        [loadOnInit]="true">
+        </app-image-viewer> -->
+    </div>
+    <div class="col-sm-6 no-gutters"
+        style="background-color:rgb(243, 245 , 245) ; flex: 1; display: flex;padding: 20px; flex-direction: column;">
+
+        <div class="row justify-content-center">
+            <h3>Document Details</h3>
+        </div>
+        <div style="margin-top: 30px;">
+            <form>
+                <table class="table">
+                    <!-- table-borderless -->
+                    <tbody>
+                        <tr>
+                            <td>File Name </td>
+                            <td>MRN-PAN123456 </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>Document Type</div>
+                            </td>
+                            <td>
+                                <div>
+                                    <!-- class="form-group" -->
+                                    <select class="form-control" id="docTypeList">
+                                        <option *ngFor="let doc of docTypeList; let i = index"
+                                            [value]="docTypeList[i].id">
+                                            {{doc.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Category
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td> Status</td>
+                            <td>
+                                <div style="display: flex;
+                                flex-direction: row;
+                                flex: 1;
+                                align-items: center;">
+                                    <label style="margin-bottom:0">
+                                        <input type="radio" value="Complete">
+                                        <span> Complete</span>
+                                    </label>
+                                    <label style="margin-bottom:0; margin-left: 20px;">
+                                        <input type="radio" value="Incomplete">
+                                        <span> Incomplete</span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <!-- <tr style="display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;"> -->
+                        <td></td>
+                        <td>
+                            <input class="btn btn-primary" type="button" value="Submit">
+                        </td>
+                        <!-- </tr> -->
+                    </tfoot>
+                </table>
+            </form>
+
+        </div>
+
+        <!--  <form class="" style="display: flex;flex-direction: column;">
+            <div>
+                File Name : Pan Card
+            </div>
+            <div style="display: flex;flex-direction: row; align-items: center;">
+                <div>
+                    Document Type :
+                </div>
+                
+                 <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Document
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" (click)="onSelectDocument('panBack')">PAN Front</a>
+                        <a class="dropdown-item" (click)="onSelectDocument('panBack')">PAN Back</a>
+                        <a class="dropdown-item" (click)="onSelectDocument('type')">Aadhar Front</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Aadhar Back</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Address Proof</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Bank Passbook</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Bank Cancelled Cheque</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">GST</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Udyog Aadhar</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Applicant Image</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Store Board</a>
+                        <a class="dropdown-item" (click)="onSelectDocument(type)">Store Interior image</a>
+                    </div>
+                </div> 
+            </div>
+            <div style="display: flex;flex-direction: row; align-items: center;">
+                <div>
+                    Status :
+                </div>
+                <div style="display: flex;
+                flex-direction: row;
+                flex: 1;
+                align-items: center;
+                justify-content: space-around">
+                    <label style="margin-bottom:0">
+                        <input type="radio" value="Complete">
+                        <span> Complete</span>
+                    </label>
+                    <label style="margin-bottom:0">
+                        <input type="radio" value="Incomplete">
+                        <span> Incomplete</span>
+                    </label>
+                </div>
+
+            </div>
+        </form> -->
+
+    </div>
+    <!-- </div> -->
+
+</div>

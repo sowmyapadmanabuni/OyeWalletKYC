@@ -33,6 +33,45 @@ select.form-control:focus {
   outline:none;
 }
 
+// .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited,
+// .btn-primary.focus,
+// .btn-primary:focus
+// .btn-primary:focus,
+// .btn-primary.focus,
+// .btn-primary.focus:active,
+// .btn-primary:active:focus,
+// .btn-primary:focus,
+// .btn-primary:focus, .btn-primary.focus
+// {
+//     background-color: $login_page_buttons_bgcolor !important;
+//     border-radius: 20px;
+//     border-color:$login_page_buttons_border_color !important;
+//     -webkit-box-shadow:0 0 0 0.2rem $login_page_buttons_bgcolor !important;
+//     box-shadow: 0 0 0 0.2rem $login_page_buttons_bgcolor !important;
+// }
+.btn-primary 
+{
+    background-color: $login_page_buttons_bgcolor !important;
+    border-radius: 20px;
+    border-color:$login_page_buttons_border_color !important;
+    padding: 4px 15px;
+    min-width: 90px;
+   
+    &:enabled:hover{
+        background-color: $login_page_buttons_border_color  !important;
+        border-color:$login_page_buttons_bgcolor !important;
+    }
+    &:focus {
+        -webkit-box-shadow:0 0 0 0.2rem $login_page_buttons_bgcolor !important;
+        box-shadow: 0 0 0 0.2rem rgb(240, 207, 135) !important;
+    }
+    &:active, &:active:focus {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        outline: none;
+    }
+}
+
 .login{
     &__container {
         background: url('../../assets/login_img_new.png'); 
@@ -83,30 +122,7 @@ select.form-control:focus {
         }
         &__otp-input{
             @include flex-container(row, center, flex-start)
-        }
-        &__btn {
-            border-radius: 20px;
-            background: $login_page_buttons_bgcolor;
-            opacity:1;
-            border-color:$login_page_buttons_border_color;
-            padding: 4px 15px;
-            min-width: 90px;
-            @mixin btnStyle {
-                background-color: $login_page_buttons_border_color;
-                border-color: $login_page_buttons_bgcolor;
-            }
-            &:hover{
-                @include btnStyle;
-                cursor: default;
-            };
-            &:focus{
-                @include btnStyle;
-                -webkit-box-shadow: none;
-                box-shadow: none;
-                outline: none;
-            }
-        }
-       
+        }       
     }
     &__warning_txt{
         color: $warning_txt_color ;
@@ -122,74 +138,6 @@ select.form-control:focus {
         
 }
 
-
-
-// .login-container {
-//     font-family: $login_other_txt_fontfamily;
-// }
-
-
-// .first-column {
-//     @include flex-container(column, flex-start, flex-start);
-//     min-height: 100vh;
-//     padding: 10px 5px 5px 2px;
-
-//     &__header-txt {
-//         @include flex-container(row, center, center);
-//         @include font-group($login_header_txt_fontfamily,$login_title_primary_color,$login_title_txt_fontsize, $login_title_txt_fontweight);
-//         width: 100%;
-//         margin: 20px 0px 10px 0px;
-//     }
-//     &__image-container {
-//         @include flex-container(column, flex-end, flex-end);
-//         flex:1;
-//     }
-// }
-
-// .login{
-//     &__container {
-//         @include flex-container(column, center, center);
-//         @include card-shadow;
-//         padding:60px 40px 30px 40px;
-//         margin-top: 40px; 
-//     }
-//     &__header-txt {
-//         @include flex-container(row, center, center);
-//         @include font-group($login_header_txt_fontfamily,$login_box_title_color,$login_box_header_txt_fontsize, $login_box_header_txt_fontweight);
-//     }
-//     &__first-input-row {
-//         @include flex-container(row, baseline, space-between);
-// 		margin: 50px 0px 10px 0px;
-// 		width: 100%;
-//     }
-//     &__btn {
-//         border-radius: 20px;
-//         background: $login_page_buttons_bgcolor;
-//         opacity:1;
-//         border-color:$login_page_buttons_border_color;
-//         padding: 4px 15px;
-//         min-width: 90px;
-//         @mixin btnStyle {
-//             background-color: $login_page_buttons_border_color;
-//             border-color: $login_page_buttons_bgcolor;
-//         }
-//         &:hover{
-//            @include btnStyle;
-//             cursor: default;
-//         };
-//         &:focus{
-//             @include btnStyle;
-//             -webkit-box-shadow: none;
-//             box-shadow: none;
-//             outline: none;
-//         }
-//     }
-// }
-// .otp_call_txt{
-//     @include flex-container(row, center, space-between);
-//     margin-top: 4px;
-//     color: $login_txt_secondary_color ;
-// }
 
 // :host::ng-deep .iti{
 //     width:100% !important;

@@ -1,0 +1,30 @@
+<div class="container-fluid home__container">
+    <div class="row justify-content-center" style="margin: 15px 0px;">
+        <h2>Oye Wallet KYC</h2>
+    </div>
+    <div class="row align-items-center" style="margin-top: 100px;" >
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8"
+            style="display:flex; flex-direction: row; align-items: center; justify-content: space-around;">
+            <div class="card-view" (click)="navigateTo('/KYCupload')">
+                <div class="card-text" >
+                    Upload KYC Docs
+                    <!-- <a [routerLink]="['/KYCupload']">Upload KYC Docs</a> -->
+                </div>
+            </div>
+           
+            <div class="card-view" (click)="navigateTo('/ViewKYCdoc')">
+                <div class="card-body card-text" >
+                    Add Details to KYC Docs
+                </div>
+            </div>
+            <div class="card-view" (click)="navigateTo('/stores')">
+                <div class="card-body card-text" >
+                    Verify KYC Docs
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+
+    </div>
+</div>

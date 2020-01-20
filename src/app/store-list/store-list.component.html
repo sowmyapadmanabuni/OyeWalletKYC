@@ -29,8 +29,9 @@
                         </div>
                         <div style="width: 20%;">
                             <div class="btn-group" style="width: 100%;">
+                                <!-- style="border-color:#ced4da; padding-left: 20px ;padding-right: 20px;" -->
                                 <button class="btn btn-sm dropdown-toggle"
-                                    style="border-color:#ced4da; padding-left: 20px ;padding-right: 20px;" type="button"
+                                    type="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Filter
                                 </button>
@@ -38,20 +39,20 @@
                                     <label class="checkbox dropdown-item" title="Select All"><input type="checkbox"
                                             value="Select All" [checked]="status" 
                                             (change)="status=!status;pstatus=rstatus=astatus=status;groupBy($event, 'All', status)">
-                                        Select All</label>
+                                        &nbsp;&nbsp;Select All</label>
                                     <div class="dropdown-divider"></div>
                                     <label class="checkbox dropdown-item" title="Pending">
                                         <input type="checkbox" value="Pending" [checked]="status||pstatus"
                                             (change)="pstatus=!pstatus;status&&status=!status;groupBy($event,'Pending', pstatus)">
-                                        Pending</label>
+                                            &nbsp;&nbsp;Pending</label>
                                     <label class="checkbox dropdown-item" title="Rejected">
                                         <input type="checkbox" value="Rejected" [checked]="status||rstatus"
                                             (change)="rstatus=!rstatus;status&&status=!status;groupBy($event,'Rejected', rstatus)">
-                                        Rejected</label>
+                                            &nbsp;&nbsp;Rejected</label>
                                     <label class="checkbox dropdown-item" title="Approved">
                                         <input type="checkbox" value="Approved" [checked]="status||astatus"
                                             (change)="astatus=!astatus;status&&status=!status;groupBy($event,'Approved', astatus)">
-                                        Approved</label>
+                                            &nbsp;&nbsp;Approved</label>
                                 </div>
                             </div>
                         </div>
@@ -76,8 +77,9 @@
                                 <tr *ngFor="let store of mf.data; let i = index">
                                     <td class="store_name_style">
                                         <a routerLink="/stores/{{store.storeDetailsID}}" [state]='store'>
-                                            <span>{{store?.brandName}}-{{store?.storeDetailsID}}</span>
+                                            <span>{{store?.brandName}}</span>
                                         </a>
+                                        <!-- -{{store?.storeDetailsID}} -->
                                         <!-- <a (click)="gotoStoreDetails(store)">{{store?.brandName}}-{{store.id}}</a> -->
                                     </td>
                                     <td>{{store?.registrationName}}</td>

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { StoreListComponent } from './store-list/store-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import {Ng2TelInputModule} from 'ng2-tel-input';
@@ -17,6 +17,12 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { LightboxModule } from 'ngx-lightbox';
 import { SearchPipe } from "./utils/search.pipe";
 import { InputModalComponent } from './input-modal/input-modal.component';
+import { KYCFileUploadComponent } from './kycfile-upload/kycfile-upload.component';
+import { HomeComponent } from './home/home.component';
+import { ViewkycdocComponent } from './viewkycdoc/viewkycdoc.component';
+import { NgxGalleryModule } from 'ngx-gallery';
+import { AddressComponent } from './address/address.component';
+
 
 
 @NgModule({
@@ -27,11 +33,17 @@ import { InputModalComponent } from './input-modal/input-modal.component';
     CountDownTimerComponent,
     StoreDetailsComponent,
     SearchPipe,
-    InputModalComponent
+    InputModalComponent,
+    KYCFileUploadComponent,
+    HomeComponent,
+    ViewkycdocComponent,
+    AddressComponent
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     Ng2TelInputModule,
@@ -39,7 +51,8 @@ import { InputModalComponent } from './input-modal/input-modal.component';
     DataTableModule,
     BrowserAnimationsModule,    
     AccordionModule.forRoot(),
-    LightboxModule
+    LightboxModule,
+    NgxGalleryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

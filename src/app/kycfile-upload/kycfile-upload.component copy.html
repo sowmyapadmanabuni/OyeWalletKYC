@@ -1,0 +1,181 @@
+<div class="container-fluid">
+    <div class="row justify-content-center" style="margin-top: 15px;">
+        <h2>Upload KYC Documents</h2>
+    </div>
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+
+            <table class="table">
+                <!-- <thead>
+                    <tr>
+                        <th scope="col" style="width: 30%;"></th>
+                        <th scope="col" style="width: 30%;"></th>
+                        <th scope="col" style="width: 30%;"></th>
+                    </tr>
+                </thead> -->
+                <tbody style="background-color: rgb(245, 245, 245);">
+                    <tr>
+                        <td>PAN Front</td>
+                        <td><input type="file" name="pan" (change)="onFileChange($event, 'pan')" /></td>
+                        <td> <button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('pan')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>PAN Back</td>
+                        <td><input type="file" name="pan" (change)="onFileChange($event, 'pan')" /></td>
+                        <td> <button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('pan')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>AADHAR Front</td>
+                        <td><input type="file" name="aadhar" (change)="onFileChange($event, 'aadhar')" /></td>
+                        <td> <button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('aadhar')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>AADHAR Back</td>
+                        <td><input type="file" name="aadhar" (change)="onFileChange($event, 'aadhar')" /></td>
+                        <td> <button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('aadhar')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>Applicant Pic</td>
+                        <td><input type="file" name="aaplicantPic" (change)="onFileChange($event, 'aaplicantPic')" />
+                        </td>
+                        <td><button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('aaplicantPic')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>Address Pic-1</td>
+                        <td><input type="file" name="addressProof" (change)="onFileChange($event, 'addressProof')" />
+                        </td>
+                        <td><button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('addressProof')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>Address Pic-2</td>
+                        <td><input type="file" name="addressProof" (change)="onFileChange($event, 'addressProof')" />
+                        </td>
+                        <td><button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('addressProof')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>Store Board</td>
+                        <td><input type="file" name="storeBoard" (change)="onFileChange($event, 'storeBoard')" />
+                        </td>
+                        <td><button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('storeBoard')">Upload</button></td>
+                    </tr>
+                    <tr>
+                        <td>Store Interior Pic-1</td>
+                        <td> <input type="file" name="storeInterior_1"
+                                (change)="onFileChange($event, 'storeInterior_1')" />
+                        </td>
+                        <td><button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('storeInterior_1')">Upload</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Store Interior Pic-2</td>
+                        <td> <input type="file" name="storeInterior_2"
+                                (change)="onFileChange($event, 'storeInterior_2')" />
+                        </td>
+                        <td><button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('storeInterior_2')">Upload</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GST</td>
+                        <td> <input type="file" name="gst" (change)="onFileChange($event, 'gst')" /></td>
+                        <td><button class="btn btn-outline-primary" type="submit"
+                                (click)="upload('gst')">Upload</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+
+    <div style="display: flex; align-items: center; justify-content: center; ">
+        <div *ngIf="error">
+            {{ error.message }}
+        </div>
+        <div *ngIf="uploadResponse.status === 'error'">
+            {{ uploadResponse.message }}
+        </div>
+        <div *ngIf="uploadResponse.status === 'progress'">
+
+            <div role="progressbar" [style.width.%]="uploadResponse.message" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100">
+                {{uploadResponse.message}}%
+            </div>
+
+        </div>
+        <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <input type="file" name="pan" (change)="onFileChange($event)" />
+        <button class="btn" type="submit">Upload</button>
+    </form> -->
+
+
+        <!-- <div>
+        <label>
+            PAN :
+            <input type="file" name="pan" (change)="onFileChange($event, 'pan')" />
+        </label>
+        <button class="btn" type="submit" (click)="upload('pan')">Upload</button>
+    </div>
+    <div>
+        <label>
+            AADHAR :
+            <input type="file" name="aadhar" (change)="onFileChange($event, 'aadhar')" />
+        </label>
+        <button class="btn" type="submit" (click)="upload('aadhar')">Upload</button>
+    </div>
+    <div>
+        <label>
+            Applicant Pic :
+            <input type="file" name="aaplicantPic" (change)="onFileChange($event, 'aaplicantPic')" />
+        </label>
+        <button class="btn" type="submit" (click)="upload('aaplicantPic')">Upload</button>
+    </div>
+    <div>
+        <label>
+            Store Board :
+            <input type="file" name="storeBoard" (change)="onFileChange($event, 'storeBoard')" />
+        </label>
+        <button class="btn" type="submit" (click)="upload('storeBoard')">Upload</button>
+    </div>
+    <div>
+        <label>
+            Store Interior Pic-1 :
+            <input type="file" name="storeInterior_1" (change)="onFileChange($event, 'storeInterior_1')" />
+        </label>
+        <button class="btn" type="submit" (click)="upload('storeInterior_1')">Upload</button>
+    </div>
+    <div>
+        <label>
+            Store Interior Pic-2 :
+            <input type="file" name="storeInterior_2" (change)="onFileChange($event, 'storeInterior_2')" />
+        </label>
+        <button class="btn" type="submit" (click)="upload('storeInterior_2')">Upload</button>
+    </div>
+    <div>
+        <label>
+            GST :
+            <input type="file" name="gst" (change)="onFileChange($event, 'gst')" />
+        </label>
+        <button class="btn" type="submit" (click)="upload('gst')">Upload</button>
+    </div>
+
+
+    <div *ngIf="uploadResponse.status === 'OK'">
+        <div>
+            File is uploaded successfully at {{uploadResponse.filePath}} location
+        </div>
+    </div> -->
+    </div>
+</div>

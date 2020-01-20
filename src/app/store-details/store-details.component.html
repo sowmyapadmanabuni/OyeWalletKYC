@@ -10,7 +10,14 @@
             <div class="row no-gutters">
                 <div class="title_container">
                     <img class="img-responsive" src="assets/home_bag.png">
-                    <div class="header-text">Cafe N Cakes</div>
+                    <div>
+                        <div class="header-text">{{storeDetails?.brandName}}
+                            <!--storeDetailsID-->
+                            <span style="color: #8a8d8f; font-size: 16px;">Store ID:
+                                {{storeDetails?.storeDetailsID}}</span>
+                        </div>
+                    </div>
+
                     <div class="status-text-box">
                         Status: <div class="status_txt">&nbsp;{{storeStatus}}</div>
                     </div>
@@ -24,25 +31,27 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 2%;">
-                                        <!-- style="width: 20%;" -->
-                                        <!-- <label style="margin-bottom:0px"> -->
-                                        <input type="checkbox" (change)="CheckAllOptions(this)">
-                                        <!-- Select All -->
-                                        <!-- </label> -->
-                                    </th>
-                                    <th scope="col" style="width: 20%;">Document Type</th>
+                                    <!-- <th scope="col" style="width: 2%;"> -->
+
+                                    <!-- <input type="checkbox" (change)="CheckAllOptions(this)"> -->
+
+                                    <!-- </th> -->
+                                    <!-- <th scope="col" style="width: 20%;">Document Type</th>
                                     <th scope="col" style="width: 30%;">Details</th>
                                     <th scope="col" style="width: 28%;">Image</th>
+                                    <th scope="col" style="width: 20%;">Action</th> -->
+                                    <th scope="col" style="width: 20%;">Document Type</th>
+                                    <th scope="col" style="width: 30%;">Details</th>
+                                    <th scope="col" style="width: 30%;">Image</th>
                                     <th scope="col" style="width: 20%;">Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngIf="storeDetails.panDetails">
-                                    <td class="align-middle">
+                                    <!-- <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
-                                    </td>
+                                    </td> -->
                                     <td class="store_name_style align-middle">PAN</td>
                                     <td class="store_name_style align-middle">{{storeDetails.panDetails.panNumber}}</td>
                                     <td class="store_name_style align-middle">
@@ -75,9 +84,9 @@
                                     </td>
                                 </tr>
                                 <tr *ngIf="storeDetails.localityDetails">
-                                    <td class="align-middle">
+                                    <!-- <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
-                                    </td>
+                                    </td> -->
                                     <td class="store_name_style align-middle">Address</td>
                                     <td class="store_name_style align-middle">
                                         <div style="display: flex; flex-direction: column;">
@@ -117,9 +126,9 @@
                                     </td>
                                 </tr>
                                 <tr *ngIf="storeDetails.aadharDetails">
-                                    <td class="align-middle">
+                                    <!-- <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
-                                    </td>
+                                    </td> -->
                                     <td class="store_name_style align-middle">Aadhar</td>
                                     <td class="store_name_style align-middle">
                                         {{storeDetails.aadharDetails.udyogAadharNo}}</td>
@@ -153,9 +162,9 @@
                                     </td>
                                 </tr>
                                 <tr *ngIf="storeDetails.bankDetails">
-                                    <td class="align-middle">
+                                    <!-- <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
-                                    </td>
+                                    </td> -->
                                     <td class="store_name_style align-middle">Bank Details</td>
                                     <td class="store_name_style align-middle">
                                         <div style="display: flex; flex-direction: column;">
@@ -194,9 +203,9 @@
                                     </td>
                                 </tr>
                                 <tr *ngIf="storeDetails.chequeDetails">
-                                    <td class="align-middle">
+                                    <!-- <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
-                                    </td>
+                                    </td> -->
                                     <td class="store_name_style align-middle">Cheque</td>
                                     <td class="store_name_style align-middle">
                                         {{storeDetails.chequeDetails.udyogAadharNo}}</td>
@@ -233,9 +242,11 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="button_group"
-                        *ngIf="showChequeDetailStatus&&showBankDetailStatus&&showAadharStatus&&showPanStatus&&showAddressStatus">
-                        <input type='button' style="margin-right: 5px;" class="btn btn-info" value="Submit" (click)="onSubmit()">
+                    <div class="button_group">
+                        <input
+                            [disabled]="!(showChequeDetailStatus&&showBankDetailStatus&&showAadharStatus&&showPanStatus&&showAddressStatus)"
+                            type='button' style="margin-right: 5px;" class="btn btn-info" value="Submit"
+                            (click)="onSubmit()">
                         <input type='button' style="margin-right: 5px;" class="btn btn-danger" value="Cancel"
                             (click)="goBack()">
                     </div>

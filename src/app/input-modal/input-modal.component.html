@@ -29,7 +29,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                     (click)="onClose($event)">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!inputMessage?.length"
                     (click)="onSaveClickEvent($event)">Save</button>
             </div>
         </div>

@@ -5,7 +5,7 @@
 	</div>
 
 	<div class="login__box-container">
-			<div class="login__title-txt">Login</div>
+		<div class="login__title-txt">Login</div>
 		<div>
 			<form #loginForm="ngForm" class="login__form">
 				<div class="login__form__header-txt">Get In</div>
@@ -31,8 +31,10 @@
 						</div>
 					</div>
 					<div>
-						<input type="button" #get_otp_btn value="Get OTP" class="btn btn-primary login__form__btn"
-							style="margin-left:12px ;" [disabled]="mobileNumber?.length!=10" (click)="getOTP()" />
+						<input type="button" #get_otp_btn value="Get OTP" class="btn btn-primary"
+							[disabled]="mobileNumber?.length!=10" style="margin-left:12px ;" (click)="getOTP()" />
+						<!-- login__form__btn -->
+
 					</div>
 				</div>
 				<div class="form-group" style="width:100%">
@@ -50,8 +52,9 @@
 					<div *ngIf="errorMessage">{{errorMessage}}</div>
 				</div>
 				<div>
-					<input type="button" (click)="getIN(); loginForm.reset()" class="btn btn-primary login__form__btn"
+					<input type="button" (click)="getIN(); loginForm.reset()" class="btn btn-primary"
 						style="margin-top:40px" [disabled]="!((otp?.length)&&(disableGetINButton))" value="Get IN" />
+					<!--login__form__btn-->
 				</div>
 				<div #notification_message_container style="margin-top: 20px;" [ngClass]="{'login__warning_txt':!notificationMessageToggle,
 																'login__success_txt':notificationMessageToggle}">
@@ -61,73 +64,3 @@
 	</div>
 
 </div>
-
-
-<!-- style="background: url('../../assets/login_img_new.png');" -->
-<!-- <div class="container-fluid login-container" >
-	<div class="row">
-		<div class="col-sm-5 first-column">
-			<img class="img-responsive" src="assets/OyeWallet.png">
-			<div class="first-column__header-txt">Login</div>
-			<!-- <div class="first-column__image-container">
-				<img class="img-responsive center-block" src="assets/login_img_new.png">
-			</div> --
-		</div>
-		<div class="col-sm-2"></div>
-		<div class="col-sm-4">
-			<form  #loginForm="ngForm" class="col login__container">
-				<div class="login__header-txt">Get In</div>
-				<div class="login__first-input-row">
-					<div class="form-group">
-						<div class="form-group">
-							<input type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'in'}"
-								[disabled]="disableGetINButton" (ng2TelOutput)="getNumber($event)"
-								(intlTelInputObject)="telInputObject($event)" (hasError)="hasError($event)"
-								(countryChange)="onCountryChange($event)" name="mobilenumber"
-								placeholder="Mobile Number" #mobilenumber="ngModel" id="mobnum"
-								pattern="^[6-9]{1}[0-9]{9}$" required [(ngModel)]='mobileNumber' maxlength="10"
-								minlength="10" class="form-control" />
-							<div class="alerts warning_txt" *ngIf="mobilenumber?.invalid && mobilenumber?.touched">
-								<div *ngIf="mobilenumber?.errors?.required">
-									Mobile number is required
-								</div>
-								<div
-									*ngIf="(mobilenumber.invalid&&(mobilenumber?.errors?.minlength?.actualLength!=mobilenumber?.errors?.minlength?.requiredLength))">
-									Invalid mobile number
-								</div>
-							</div>
-						</div>
-					</div>
-					<div>
-						<input type="button" #get_otp_btn value="Get OTP" class="btn btn-primary login__btn" style="margin-left:12px ;"
-							[disabled]="mobileNumber?.length!=10" (click)="getOTP()" />
-					</div>
-				</div>
-				<div class="form-group" style="width:100%">
-					<div style="display: flex;flex-direction: row; align-items: center;">
-						<img src="assets/key.png" width="24px" height="24px"
-							style="position: absolute; margin-left: 4px; " />
-						<input class="form-control" style="padding-left: 35px;" placeholder="Enter OTP" type="text"
-							name="otp" [(ngModel)]="otp" maxlength="6" required />
-					</div>
-					<div class="otp_call_txt">
-						<a aria-disabled="true" id="otpBycall" href="" (click)="OTPByCall($event)"
-							[class.disabled]="mobileNumber?.length!=10">OTP by Call</a>
-						<div #countdown_timer></div>
-					</div>
-					<div *ngIf="errorMessage">{{errorMessage}}</div>
-				</div>
-				<div>
-					<input type="button" (click)="getIN(); loginForm.reset()" class="btn btn-primary login__btn"
-						style="margin-top:40px" [disabled]="!((otp?.length)&&(disableGetINButton))" value="Get IN" />
-				</div>
-				<div #notification_message_container style="margin-top: 20px;" [ngClass]="{'warning_txt':!notificationMessageToggle,
-																'success_txt':notificationMessageToggle}">
-				</div>
-			</form>
-			<div class="col-sm-1">
-
-			</div>
-
-		</div>
-	</div> -->

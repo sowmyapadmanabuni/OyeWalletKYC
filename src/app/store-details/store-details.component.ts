@@ -180,6 +180,8 @@ export class StoreDetailsComponent implements OnInit {
       }
     }, error => {
       console.log("error", error)
+      Swal.fire('Error', 'Something wrong!!', 'error')
+      this.goBack();
     })
   }
 

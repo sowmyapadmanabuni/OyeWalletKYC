@@ -13,21 +13,23 @@ export class InputModalComponent implements OnInit {
   @Output() onSave = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Input('modalId') modalId: string;
-  inputMessage: string;
 
+  inputMessage: string;
   constructor() { }
 
   ngOnInit() {
   }
 
   onSaveClickEvent(event) {
+
     this.onSave.emit(this.inputMessage)
     this.onClose(event);
+    // document.getElementById(`exampleModalCenter${this.modalId}`).style.display = 'none';
   }
   onClose(event) {
     this.onCancel.emit(event);
   }
-  valuechange(event){
-    console.log(event)
-  }
+  // valuechange(event) {
+  //   console.log(event)
+  // }
 }

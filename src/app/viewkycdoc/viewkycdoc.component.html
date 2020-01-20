@@ -1,0 +1,242 @@
+<div class="container-fluid no-gutters viewkyc__container row">
+    <!-- <div class="row no-gutters"> -->
+    <div class="col-sm-6" style="background-color: rgb(243, 243, 243);">
+        <!-- <img [src]="panLoction" alt="Locality" height="100%" /> -->
+        <div style="width: 100%; height: 100%; padding: 50px;">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+        </div>
+    </div>
+
+    <div class="col-sm-6 no-gutters" style=" flex: 1; display: flex;padding: 20px; flex-direction: column;">
+
+        <div class="row justify-content-center">
+            <h3>Document Details</h3>
+        </div>
+        <div style="padding: 20px;">
+            <form #myForm="ngForm" (ngSubmit)="submitForm(myForm)" novalidate>
+                <table class="table table-borderless">
+                    <!-- table-borderless -->
+                    <thead>
+                        <th style="width: 25%;"></th>
+                        <th style="width: 75%;"></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-text">File Name</div>
+                            </td>
+                            <td>
+                                <div class="form-text">MRN-PAN123456.png</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="docTypeList" class="form-text">Document Type</label>
+                            </td>
+                            <td>
+                                <div>
+                                    <!-- class="form-group" -->
+                                    <select class="form-control" id="docTypeList" name="docType" #docType='ngModel'
+                                        (change)="onSelectDocument($event)" required [(ngModel)]="kycDetails.docType">
+                                        <option [disabled]="true" [selected]="true">Select Document</option>
+                                        <option *ngFor="let doc of docTypeList; let i = index" [value]="doc.name">
+                                            {{doc.name}}
+                                        </option> <!-- [disabled]="i==0" [selected]="i==0" -->
+
+                                    </select>
+                                    <div *ngIf="myForm.submitted" class="invalid-feedback">
+                                        <div *ngIf="kycDetails.docType==='Select Document'">Please select document</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='PAN'">
+                            <td>
+                                <label for="panNumber" class="form-text">PAN Number</label>
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" maxlength="10" id="panNumber" name="panNumber"
+                                    #panNumber='ngModel' [(ngModel)]="kycDetails.panNumber" required>
+                                <div *ngIf="myForm.submitted && panNumber.invalid" class="invalid-feedback">
+                                    <div *ngIf="panNumber.errors.required">Pan No is required</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='AADHAR'">
+                            <td>
+                                <label for="aadharNumber" class="form-text">Aadhar Number</label>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" maxlength="12" id="aadharNumber"
+                                    #aadharNumber='ngModel' name="aadharNumber" [(ngModel)]="kycDetails.aadharNumber"
+                                    required>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='Applicant Pic'">
+                            <td>
+                                <label for="applicantName" class="form-text">Name</label>
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" maxlength="24" id="applicantName"
+                                    #applicantName='ngModel' name="applicantName" [(ngModel)]="kycDetails.applicantName"
+                                    required>
+
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='Address Proof'">
+                            <td>
+                                <label for="addressDetails" class="form-text">Address</label>
+                            </td>
+                            <td>
+                                <!-- <div>Address</div> -->
+                                <!-- <input type="text" maxlength="10"> -->
+                                <app-address></app-address>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='Bank Document'">
+                            <td>
+                                <label for="bankDetails" class="form-text">Bank Details</label>
+                            </td>
+                            <td>
+                                <label for="payeeName"
+                                    style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139);">
+                                    <input class="form-control" type="text" id="payeeName" name="payeeName"
+                                        #payeeName='ngModel' [(ngModel)]="kycDetails.payeeName" required>
+                                    Payee Name
+                                </label>
+                                <label for="accountNumber"
+                                    style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139); ">
+                                    <input class="form-control" type="number" id="accountNumber" name="accountNumber"
+                                        #accountNumber='ngModel' [(ngModel)]="kycDetails.accountNumber" required>
+                                    Account Number
+                                </label>
+                                <label for="ifscCode"
+                                    style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139);">
+                                    <input class="form-control" type="text" id="ifscCode" name="ifscCode"
+                                        #ifscCode='ngModel' [(ngModel)]="kycDetails.ifscCode" required>
+                                    IFSC Code
+                                </label>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='Store Images'">
+                            <td>
+                                <label for="storeName" class="form-text">Store Name</label>
+                            </td>
+                            <td>
+                                <input class="form-control" type="text" maxlength="20" id="storeName" name="storeName"
+                                    #storeName='ngModel' [(ngModel)]="kycDetails.storeName" required>
+                            </td>
+
+                        </tr>
+                        <tr *ngIf="selectedDocId=='Store Images'">
+                            <td>
+                                <label for="category" class="form-text">Category</label>
+                            </td>
+                            <td>
+                                <select class="form-control" (change)="onSelectCategory($event)" #category='ngModel'
+                                    id="category" name="category" [(ngModel)]="kycDetails.category" required>
+                                    <option [disabled]="true" [selected]="true">Select Category</option>
+                                    <option *ngFor="let category of categoryList; let i = index"
+                                        [value]="categoryList[i].name">
+                                        {{category.name}}
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='Udyog Aadhar'">
+                            <td>
+                                <label for="udyogAadharNumber" class="form-text">Udyog Aadhar Number</label>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" maxlength="12" id="udyogAadharNumber"
+                                    #udyogAadharNumber='ngModel' name="udyogAadharNumber"
+                                    [(ngModel)]="kycDetails.udyogAadharNumber" required>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedDocId=='GSTIN'">
+                            <td>
+                                <label for="gstinNumber" class="form-text">GSTIN Number</label>
+                            </td>
+                            <td>
+                                <input class="form-control" type="number" maxlength="12" id="gstinNumber"
+                                    #gstinNumber='ngModel' name="gstinNumber" [(ngModel)]="kycDetails.gstinNumber"
+                                    required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="status" class="form-text">Status</label>
+                            </td>
+                            <td>
+                                <div style="display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: center;">
+                                    <!-- <label style="margin-bottom:0">
+                                        <input type="radio" value="Complete">
+                                        <span> Complete</span>
+                                    </label>
+                                    <label style="margin-bottom:0; margin-left: 20px;">
+                                        <input type="radio" value="Incomplete">
+                                        <span> Incomplete</span>
+                                    </label> -->
+                                    <div class="custom-control custom-radio" (click)="handleStatus($event)">
+                                        <input id="complete" type="radio" class="custom-control-input" value="complete"
+                                            #complete='ngModel' name="status" ngModel>
+                                        <label class="custom-control-label" for="complete">Complete</label>
+                                    </div>
+
+                                    <div class="custom-control custom-radio" (click)="handleStatus($event)">
+                                        <input id="incomplete" type="radio" class="custom-control-input"
+                                            #incomplete='ngModel' value="incomplete" name="status" ngModel>
+                                        <label class="custom-control-label" for="incomplete">Incomplete</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="showReasonsDropDown">
+                            <td>
+                                <label for="reasonForRejection" class="form-text">Reason</label>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <select class="form-control" id="declinedReasonsListId"
+                                        (change)="onSelectDeclinedReason($event)" id="reasonForRejection"
+                                        #reasonForRejection='ngModel' name="reasonForRejection"
+                                        [(ngModel)]="kycDetails.reasonForRejection" required>
+                                        <option [disabled]="true" [selected]="true">Select Reason</option>
+                                        <option *ngFor="let reason of declinedReasonsList; let i = index"
+                                            [value]="declinedReasonsList[i].message">
+                                            {{reason.message}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group" *ngIf="selectedReasonForDeclined=='Other'">
+                                    <!-- border-radius: 0.25rem -->
+                                    <textarea class="form-control" rows="3" style="width: 100%;border:1px solid #ced4da"
+                                        placeholder="Enter reason here" id="reasonMessage" #reasonMessage='ngModel'
+                                        name="reasonMessage" [(ngModel)]="kycDetails.reasonMessage" required></textarea>
+                                    <!-- <input class="form-control" type="text" maxlength="20" placeholder="Enter reason here"> -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <!-- <tr style="display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;"> -->
+                        <td></td>
+                        <td style="display: flex; flex-direction: row-reverse;">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                            <!-- [disabled]="!myForm.form.valid"-->
+                        </td>
+                        <!-- </tr> -->
+                    </tfoot>
+                </table>
+            </form>
+
+        </div>
+
+
+    </div>
