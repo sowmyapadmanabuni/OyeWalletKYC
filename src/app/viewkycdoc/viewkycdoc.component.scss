@@ -3,24 +3,19 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
+@import 'abstracts/placeholders';
 
 
 .viewkyc{
     &__container{
-        // display:flex;
-        // flex-direction:row;
+        display:flex;
+        flex-direction:column;
         min-height : 100vh;
-        // min-width: 100vh;
-        // background-color: yellow;
     }
 }
 .no-gutters {
     @include no-gutters;
  }
-// :host::ng-deep ngx-gallery, ngx-gallery-arrow {
-//     /* your styles */
-//     color: green;
-// }
 
 :host ::ng-deep .ngx-gallery-icon .ngx-gallery-icon-content {
     color: deepskyblue;
@@ -28,3 +23,4 @@
 .invalid-feedback {
     display: block;
   }
+ 

@@ -1,5 +1,6 @@
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
+@import 'abstracts/placeholders';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -47,7 +48,7 @@ a{
       background-repeat:no-repeat ;
       background-position: right top;
       min-height: 100vh;
-      min-width: 100vh;
+      // min-width: 100vh;
       background-size: 270px;
       @include media-breakpoint-only(xs) { background-size: 150px }
       @include media-breakpoint-only(sm) { background-size: 200px;}
@@ -56,13 +57,13 @@ a{
       @include media-breakpoint-only(xl) { background-size: 290px; }
     };
 
-    &__header-title {
-      @include flex-container(row, center, center);
-      @include font-group($header_txt_fontfamily,$home_title_primary_color,$home_title_txt_fontsize, $home_title_txt_fontweight);
-      padding-left:-20px;
-      text-align: center;
-      @include media-breakpoint-down(md) { font-size: $mobile_header_txt_fontsize;}
-    };
+    // &__header-title {
+    //   @include flex-container(row, center, center);
+    //   @include font-group($header_txt_fontfamily,$home_title_primary_color,$home_title_txt_fontsize, $home_title_txt_fontweight);
+    //   padding-left:-20px;
+    //   text-align: center;
+    //   @include media-breakpoint-down(md) { font-size: $mobile_header_txt_fontsize;}
+    // };
 
     &__left_bar_img{
       // height:86vh;

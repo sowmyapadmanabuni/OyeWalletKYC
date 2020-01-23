@@ -1,0 +1,13 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.header-title {
+    @include flex-container(row, center, center);
+    @include font-group($header_txt_fontfamily,$home_title_primary_color,$home_title_txt_fontsize, $home_title_txt_fontweight);
+    // padding-left:-20px;
+    text-align: center;
+    @include media-breakpoint-down(md) { 
+        font-size: $mobile_header_txt_fontsize;
+    }
+};

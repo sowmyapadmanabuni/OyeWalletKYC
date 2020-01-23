@@ -1,8 +1,8 @@
-<div class="container-fluid no-gutters details__container">
+<div class="container-fluid details__container">
     <div class="details__title_bar">
-        <img class="img-responsive" src="assets/OyeWallet.png">
+        <a [routerLink]="['/home']"><img class="img-responsive" src="assets/OyeWallet.png"></a>
     </div>
-    <div class="row no-gutters details__sub_container">
+    <div class="row details__sub_container">
         <div class="col-sm-1 d-none d-sm-block no-gutters">
             <img class="img-responsive left_bar_img" src="assets/home_left_side.png">
         </div>
@@ -55,10 +55,12 @@
                                     <td class="store_name_style align-middle">PAN</td>
                                     <td class="store_name_style align-middle">{{storeDetails.panDetails.panNumber}}</td>
                                     <td class="store_name_style align-middle">
-                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
-                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="_albums[0].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_0=true;"
+                                            (click)="!disableClick_0&&open(0)" />
+                                        <img [src]="_albums[1].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_1=true;"
+                                            (click)="!disableClick_1&&open(1)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showPanStatus; else elseBlock">
@@ -83,60 +85,20 @@
                                         </ng-template>
                                     </td>
                                 </tr>
-                                <tr *ngIf="storeDetails.localityDetails">
-                                    <!-- <td class="align-middle">
-                                        <input type="checkbox" (change)="checkOption(this)">
-                                    </td> -->
-                                    <td class="store_name_style align-middle">Address</td>
-                                    <td class="store_name_style align-middle">
-                                        <div style="display: flex; flex-direction: column;">
-                                            <span>{{storeDetails.localityDetails.address}}</span>
-                                            <span>{{storeDetails.localityDetails.city}}</span>
-                                            <span>{{storeDetails.localityDetails.state}}</span>
-                                            <span>{{storeDetails.localityDetails.pinCode}}</span>
-                                        </div>
-                                    </td>
-                                    <td class="store_name_style align-middle">
-                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
-                                        <img class="details__image_style" [src]="testImageUrl_1" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
-                                    </td>
-                                    <td class="align-middle">
-                                        <div *ngIf="!showAddressStatus; else elseBlock">
-                                            <input type='button' style="margin: 4px;" class="btn btn-info"
-                                                value="Approve" (click)="approve('address-approve')">
-                                            <app-input-modal [displayBtnText]="rejectBtnText"
-                                                [modalTitle]="rejectModalTitle" modalId="2"
-                                                (onSave)="reject($event, 'address-reject')" (onCancel)="$event">
-                                            </app-input-modal>
-                                        </div>
-                                        <ng-template #elseBlock>
-                                            <div
-                                                [ngClass]="{'text-approved':isAddressApproved,'text-rejected':!isAddressApproved}">
-                                                <div *ngIf="isAddressApproved; else rejectBlock">
-                                                    APPROVED
-                                                </div>
-                                                <ng-template #rejectBlock>
-                                                    <div>REJECTED</div>
-                                                    <div>Reason: {{addressRejectionReason}}</div>
-                                                </ng-template>
-                                            </div>
-                                        </ng-template>
-                                    </td>
-                                </tr>
                                 <tr *ngIf="storeDetails.aadharDetails">
                                     <!-- <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
                                     </td> -->
                                     <td class="store_name_style align-middle">Aadhar</td>
                                     <td class="store_name_style align-middle">
-                                        {{storeDetails.aadharDetails.udyogAadharNo}}</td>
+                                        {{storeDetails.aadharDetails.aadharDetailsID}}</td>
                                     <td class="store_name_style align-middle">
-                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
-                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="_albums[2].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_a1=true;"
+                                            (click)="!disableClick_a1&&open(0)" />
+                                        <img [src]="_albums[3].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_a2=true;"
+                                            (click)="!disableClick_a2&&open(0)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showAadharStatus; else elseBlock">
@@ -161,6 +123,53 @@
                                         </ng-template>
                                     </td>
                                 </tr>
+                                <tr *ngIf="storeDetails.localityDetails">
+                                    <!-- <td class="align-middle">
+                                        <input type="checkbox" (change)="checkOption(this)">
+                                    </td> -->
+                                    <td class="store_name_style align-middle">Address</td>
+                                    <td class="store_name_style align-middle">
+                                        <div style="display: flex; flex-direction: column;">
+                                            <span>{{storeDetails.localityDetails.address}}</span>
+                                            <span>{{storeDetails.localityDetails.city}}</span>
+                                            <span>{{storeDetails.localityDetails.state}}</span>
+                                            <span>{{storeDetails.localityDetails.pinCode}}</span>
+                                        </div>ß
+                                    </td>
+                                    <td class="store_name_style align-middle">
+                                        <img [src]="_albums[4].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_ad1=true;"
+                                            (click)="!disableClick_ad1&&open(0)" />
+                                        <!-- $event.target.src = 'assets/dummy_image.png';-->
+                                        <img [src]="_albums[5].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_ad2=true;"
+                                            (click)="!disableClick_ad2&&open(0)" />
+                                        <!-- $event.target.src = 'assets/dummy_image.png';-->
+                                    </td>
+                                    <td class="align-middle">
+                                        <div *ngIf="!showAddressStatus; else elseBlock">
+                                            <input type='button' style="margin: 4px;" class="btn btn-info"
+                                                value="Approve" (click)="approve('address-approve')">
+                                            <app-input-modal [displayBtnText]="rejectBtnText"
+                                                [modalTitle]="rejectModalTitle" modalId="2"
+                                                (onSave)="reject($event, 'address-reject')" (onCancel)="$event">
+                                            </app-input-modal>
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <div
+                                                [ngClass]="{'text-approved':isAddressApproved,'text-rejected':!isAddressApproved}">
+                                                <div *ngIf="isAddressApproved; else rejectBlock">
+                                                    APPROVED
+                                                </div>
+                                                <ng-template #rejectBlock>
+                                                    <div>REJECTED</div>
+                                                    <div>Reason: {{addressRejectionReason}}</div>
+                                                </ng-template>
+                                            </div>
+                                        </ng-template>
+                                    </td>
+                                </tr>
+
                                 <tr *ngIf="storeDetails.bankDetails">
                                     <!-- <td class="align-middle">
                                         <input type="checkbox" (change)="checkOption(this)">
@@ -174,10 +183,12 @@
                                         </div>
                                     </td>
                                     <td class="store_name_style align-middle">
-                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
-                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="_albums[5].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_b1=true;"
+                                            (click)="!disableClick_b1&&open(0)" />
+                                        <img [src]="_albums[6].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_b2=true;"
+                                            (click)="!disableClick_b2&&open(0)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showBankDetailStatus; else elseBlock">
@@ -208,12 +219,14 @@
                                     </td> -->
                                     <td class="store_name_style align-middle">Cheque</td>
                                     <td class="store_name_style align-middle">
-                                        {{storeDetails.chequeDetails.udyogAadharNo}}</td>
+                                        {{storeDetails.chequeDetails.chequeDetailsID}}</td>
                                     <td class="store_name_style align-middle">
-                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
-                                        <img [src]="testImageUrl_1" class="details__image_style" alt="Locality"
-                                            width="60px" height="60px" (click)="open(1)" />
+                                        <img [src]="_albums[7].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_c1=true;"
+                                            (click)="!disableClick_c1&&open(0)" />
+                                        <img [src]="_albums[8].thumb" class="details__image_style" alt="Image"
+                                            width="60px" height="60px" (error)="disableClick_c2=true;"
+                                            (click)="!disableClick_c2&&open(0)" />
                                     </td>
                                     <td class="align-middle">
                                         <div *ngIf="!showChequeDetailStatus; else elseBlock">

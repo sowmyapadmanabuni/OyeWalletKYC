@@ -1,5 +1,6 @@
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
+@import 'abstracts/placeholders';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -13,17 +14,26 @@ a{
     }
 }
 .card-view {
-    width: 250px;
+    width: 220px;
     height: 100px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-   
+
+    @include card-shadow;
+    border-radius: 50px;
+
+    @include media-breakpoint-down(sm) {  
+        width: 180px;
+        height: 70px;
+    }
+    @include media-breakpoint-down(md) {  
+        width: 200px;
+        height: 80px;
+    }
 }
 .card-view:hover{
-    background-color: #f7f5f5;
+    background-color: #f3f3f3;
     cursor: pointer !important;
 }
 div.header {
@@ -38,10 +48,25 @@ div.header {
 }
 .home{
     &__container{
-            // display:flex;
-            // flex-direction:row;
-        min-height : 100vh;
-            // min-width: 100vh;
-            // background-color: yellow;
+            display:flex;
+            flex-direction:column;
+            min-height : 100vh;
     }
 }
+.menu-container{
+    @include flex-container(row, flex-start, space-between);
+    flex: 1;
+    @include media-breakpoint-down(sm) {  
+        @include flex-container(column, center, space-around);
+      }
+}
+.menu-outer-container{
+    @include flex-container(row, flex-start, space-between);
+    margin-top: 100px;
+    flex: 1;
+    @include media-breakpoint-down(sm) {  
+        @include flex-container(column, center, space-around);
+        margin-top: 30px;
+    }
+}
+

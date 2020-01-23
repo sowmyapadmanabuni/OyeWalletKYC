@@ -6,11 +6,14 @@ import { Router, NavigationStart, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { DataAPIService } from '../services/dataapi.service';
 import Swal from 'sweetalert2'
+import { MEDIA_LOCATION_URL } from '../utils/url-constants'
+import { DefaultImage } from '../utils/defaultImage';
 
 @Component({
   selector: 'app-store-details',
   templateUrl: './store-details.component.html',
   styleUrls: ['./store-details.component.scss']
+
 })
 export class StoreDetailsComponent implements OnInit {
   storeDetails: any;
@@ -35,9 +38,8 @@ export class StoreDetailsComponent implements OnInit {
   rejectBtnText: string = 'Reject';
   rejectModalTitle = 'Reason';
   documentList: any = []
-  testImageUrl_1: string;
-  testImageUrl_2: string;
-  testImageUrl_3: string;
+  // testImageUrl_1: string;
+
   storeStatus: string = "Approved";
   private _albums: Array<any> = [];
   private state$: Observable<object>;
@@ -56,13 +58,14 @@ export class StoreDetailsComponent implements OnInit {
 
     //   this._albums.push(album);
     // }
-    const album = {
-      src: `https://images.pexels.com/photos/34950/pexels-photo.jpg?cs=srgb&dl=abandoned-forest-industry-nature-34950.jpg&fm=jpg`,
-      caption: "Pan",
-      thumb: this.testImageUrl_1
-    };
-    console.log("album", album)
-    this._albums.push(album);
+
+    // const album = {
+    //   src: `https://images.pexels.com/photos/34950/pexels-photo.jpg?cs=srgb&dl=abandoned-forest-industry-nature-34950.jpg&fm=jpg`,
+    //   caption: "Pan",
+    //   thumb: this.testImageUrl_1
+    // };
+    // console.log("album", album)
+    // this._albums.push(album);
   }
 
 
@@ -81,9 +84,9 @@ export class StoreDetailsComponent implements OnInit {
   }
   open(index: number = 0): void {
     // open lightbox
-    // this._lightbox.open(this._albums, index);
+    this._lightbox.open(this._albums, index);
 
-    this._lightbox.open(this._albums, 0);
+    // this._lightbox.open(this._albums, 0);
   }
 
   close(): void {
@@ -105,13 +108,41 @@ export class StoreDetailsComponent implements OnInit {
       console.log("data", data)
       this.storeDetails = data;
       this.storeStatus = this.storeDetails.registration ? (' ' + this.storeDetails.registration.storeStatus) : ' None';
-      // this.testImageUrl = `http://mediauploaddev.oyespace.com/Images/${this.storeDetails.panDetails.panIDFront}`
-      // this.testImageUrl_1 = `http://mediauploaddev.oyespace.com/Images/1554868484472.jpg`
-      // this.testImageUrl_2 = `http://mediauploaddev.oyespace.com/Images/1554867360418.jpg`
-      // this.testImageUrl_3 = `http://mediauploaddev.oyespace.com/Images/1554820898644.jpg`
-      this.testImageUrl_1 = `https://images.pexels.com/photos/34950/pexels-photo.jpg?cs=srgb&dl=abandoned-forest-industry-nature-34950.jpg&fm=jpg`
-    })
 
+      // this.testImageUrl_1 = `https://images.pexels.com/photos/34950/pexels-photo.jpg?cs=srgb&dl=abandoned-forest-industry-nature-34950.jpg&fm=jpg`
+
+
+      this._albums.push(this.getImageConfig(this.storeDetails.panDetails.panIdBack, 'PAN', this.storeDetails.panDetails.panIdBack));
+      this._albums.push(this.getImageConfig('aadharFront.jpeg', 'PAN', 'aadharFront.jpeg'));
+
+      this._albums.push(this.getImageConfig('', 'Aadhar', ''));
+      this._albums.push(this.getImageConfig('', 'Aadhar', ''));
+
+      this._albums.push(this.getImageConfig('', 'Address', ''));
+      this._albums.push(this.getImageConfig('', 'Address', ''));
+      this._albums.push(this.getImageConfig('', 'Bank', ''));
+      this._albums.push(this.getImageConfig('', 'Bank', ''));
+      this._albums.push(this.getImageConfig('', 'Cheque', ''));
+      this._albums.push(this.getImageConfig('', 'Cheque', ''));
+      
+
+
+      // this._albums.push(this.getImageConfig(this.storeDetails.panDetails.panIDFront, 'PAN', this.storeDetails.panDetails.panIDFront));
+      // this._albums.push(this.getImageConfig(this.storeDetails.panDetails.panIdBack, 'PAN', this.storeDetails.panDetails.panIdBack));
+
+      // this._albums.push(this.getImageConfig(this.storeDetails.aadharDetails.proAadharNoFront, 'Aadhar', this.storeDetails.aadharDetails.proAadharNoFront));
+      // this._albums.push(this.getImageConfig(this.storeDetails.aadharDetails.proAadharNoBack, 'Aadhar', this.storeDetails.aadharDetails.proAadharNoBack));
+
+    })
+  }
+
+  getImageConfig(srcImage, caption, thumbImage) {
+    // console.log("image", MEDIA_LOCATION_URL.replace('{imageName}', srcImage))
+    return {
+      src: MEDIA_LOCATION_URL.replace('{imageName}', srcImage),
+      caption: caption,
+      thumb: MEDIA_LOCATION_URL.replace('{imageName}', thumbImage)
+    }
   }
 
   reject(reason, btnType: string) {
@@ -185,4 +216,7 @@ export class StoreDetailsComponent implements OnInit {
     })
   }
 
+  onImgError(event) {
+    event.target.src = 'assets/filter.png';
+  }
 }

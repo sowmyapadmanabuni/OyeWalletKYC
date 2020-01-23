@@ -1,5 +1,6 @@
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
+@import 'abstracts/placeholders';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -22,4 +23,61 @@
     background: white;
     cursor: inherit;
     display: block;
+  }
+
+  .input-fields-container {
+    width: 45%;
+    @include media-breakpoint-down(sm) {  
+      width: 100%;
+    }
+  }
+  .imagePreview{
+    @include flex-container(row, center, flex-end);
+    flex-wrap: wrap;
+    width: 45%;
+    @include media-breakpoint-down(sm) {  
+      @include flex-container(row, flex-start, flex-start);
+      width: 100%;
+    }
+  }
+  .details__image_style{
+    height:140px;
+    width:140px;
+    margin: 5px;
+
+    @include media-breakpoint-only(xs) {   
+      height:70px;
+      width:70px; }
+    @include media-breakpoint-only(sm) {   
+      height:70px;
+      width:70px;}
+    @include media-breakpoint-only(md) {   
+      height:130px;
+      width:130px; }
+    @include media-breakpoint-only(lg) {   
+      height:140px;
+      width:140px; }
+    @include media-breakpoint-only(xl) {  
+      height:140px;
+      width:140px; }
+  }
+  .card-body-container{
+    @include flex-container(row, center, space-between);
+    flex-wrap: wrap;
+    @include media-breakpoint-down(sm) {  
+         @include flex-container(column, flex-start, space-between);
+    }
+  }
+  .kyc-field-label{
+    // display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139)
+  }
+  .invalid-feedback {
+    display: block;
+  }
+
+  .success-check-circle {
+    color:green;margin-left: 10px;
+  }
+  .row-space-between{
+    @include flex-container(row, center, space-between)
   }

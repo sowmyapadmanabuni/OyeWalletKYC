@@ -2,99 +2,571 @@
     <div class="row justify-content-center" style="margin-top: 15px;">
         <h2>Upload KYC Documents</h2>
     </div>
-    <div class="row" style="margin-top: 50px;">
+    <div class="row" style="margin: 50px 0px;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
+            <form novalidate #kycFormGroup="ngForm" (ngSubmit)="onSubmit()">
+                <div class="card">
+                    <div class="card-header">MERCHANT</div>
+                    <div class="card-body card-body-container">
+                        <div>
+                            <div style="min-width: 300px;">
+                                <!--flex:1; margin-right:1em-->
+                                <label for="applicantName" class="form-text">Name</label>
+                                <input class="form-control" type="text" maxlength="24" id="applicantName"
+                                    name="applicantName" [(ngModel)]="kycDetails.applicantName" #applicantName="ngModel"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="form-text">Image: </label>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="applicantPic"
+                                            name="applicantPic" (change)="onFileChange($event, 'applicantPic')" required
+                                            [attr.disabled]="applicantPicStatus ? '' : null">
+                                        <label class="custom-file-label" id="applicantPicLabel" #labelImportView
+                                            for="applicantPic">Choose file</label>
+                                    </div>
 
-            <table class="table">
-                <!-- <thead>
-                    <tr>
-                        <th scope="col" style="width: 30%;"></th>
-                        <th scope="col" style="width: 30%;"></th>
-                        <th scope="col" style="width: 30%;"></th>
-                    </tr>
-                </thead> -->
-                <tbody style="background-color: rgb(245, 245, 245);">
-                    <tr>
-                        <td>PAN Front</td>
-                        <td><input type="file" name="pan" (change)="onFileChange($event, 'pan')" /></td>
-                        <td> <button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('pan')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>PAN Back</td>
-                        <td><input type="file" name="pan" (change)="onFileChange($event, 'pan')" /></td>
-                        <td> <button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('pan')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>AADHAR Front</td>
-                        <td><input type="file" name="aadhar" (change)="onFileChange($event, 'aadhar')" /></td>
-                        <td> <button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('aadhar')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>AADHAR Back</td>
-                        <td><input type="file" name="aadhar" (change)="onFileChange($event, 'aadhar')" /></td>
-                        <td> <button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('aadhar')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>Applicant Pic</td>
-                        <td><input type="file" name="aaplicantPic" (change)="onFileChange($event, 'aaplicantPic')" />
-                        </td>
-                        <td><button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('aaplicantPic')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>Address Pic-1</td>
-                        <td><input type="file" name="addressProof" (change)="onFileChange($event, 'addressProof')" />
-                        </td>
-                        <td><button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('addressProof')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>Address Pic-2</td>
-                        <td><input type="file" name="addressProof" (change)="onFileChange($event, 'addressProof')" />
-                        </td>
-                        <td><button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('addressProof')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>Store Board</td>
-                        <td><input type="file" name="storeBoard" (change)="onFileChange($event, 'storeBoard')" />
-                        </td>
-                        <td><button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('storeBoard')">Upload</button></td>
-                    </tr>
-                    <tr>
-                        <td>Store Interior Pic-1</td>
-                        <td> <input type="file" name="storeInterior_1"
-                                (change)="onFileChange($event, 'storeInterior_1')" />
-                        </td>
-                        <td><button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('storeInterior_1')">Upload</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Store Interior Pic-2</td>
-                        <td> <input type="file" name="storeInterior_2"
-                                (change)="onFileChange($event, 'storeInterior_2')" />
-                        </td>
-                        <td><button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('storeInterior_2')">Upload</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>GST</td>
-                        <td> <input type="file" name="gst" (change)="onFileChange($event, 'gst')" /></td>
-                        <td><button class="btn btn-outline-primary" type="submit"
-                                (click)="upload('gst')">Upload</button></td>
-                    </tr>
-                </tbody>
-            </table>
+                                    <div *ngIf="!applicantPicStatus; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableApplicantUploadBtn"
+                                            (click)="upload('applicantPic')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="imagePreview" *ngIf="applicantPic">
+                            <img [src]="applicantPic" class="details__image_style" alt="Applicant Image"
+                                style="width:100%; height:100%" (click)="open(1)" />
+                        </div>
+
+                    </div>
+                </div>
 
 
+                <div class="card" style="margin-top: 15px;">
+                    <div class="card-header">PAN</div>
+                    <div class="card-body card-body-container">
+                        <div>
+                            <div>
+                                <label for="panNumber" class="form-text">PAN Number</label>
+                                <input class="form-control" type="text" maxlength="10" id="panNumber" name="panNumber"
+                                    [(ngModel)]="kycDetails.panNumber" #panNumber="ngModel" required>
+                                <div *ngIf="kycFormGroup.submitted && panNumber.invalid" class="invalid-feedback">
+                                    <div *ngIf="panNumber.errors.required">Pan No is required</div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-text">Front Image: </label>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="panFront"
+                                            name="panFront" (change)="onFileChange($event, 'panFront')"
+                                            [attr.disabled]="panFrontStatus ? '' : null">
+                                        <label class="custom-file-label" id="panFrontPicLabel" #labelImportView
+                                            for="panFront">Choose file</label>
+                                    </div>
+
+                                    <div *ngIf="!panFrontStatus; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enablePanFrontUploadBtn"
+                                            (click)="upload('panFront')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-text">Back Image: </label>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="panBack"
+                                            name="panBack" (change)="onFileChange($event, 'panBack')"
+                                            [attr.disabled]="panBackStatus ? '' : null">
+                                        <label class="custom-file-label" id="panBackPicLabel" #labelImportView
+                                            for="panBack">Choose file</label>
+                                    </div>
+
+                                    <div *ngIf="!panBackStatus; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enablePanBackUploadBtn"
+                                            (click)="upload('panBack')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="imagePreview">
+                            <img *ngIf="panBack" [src]="panFront" class="details__image_style" alt="Applicant Image"
+                                style="width:100%; height:100%" (click)="open(1)" />
+                            <img *ngIf="panFront" [src]="panFront" class="details__image_style" alt="Applicant Image"
+                                style="width:100%; height:100%" (click)="open(1)" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 15px;">
+                    <div class="card-header">AADHAR</div>
+                    <div class="card-body card-body-container">
+                        <div>
+                            <div>
+                                <label for="aadharNumber" class="form-text">Aadhar Number</label>
+                                <input class="form-control" type="text" maxlength="10" id="aadharNumber"
+                                    name="aadharNumber" [(ngModel)]="kycDetails.aadharNumber" #aadharNumber="ngModel"
+                                    required>
+                                <div *ngIf="kycFormGroup.submitted && aadharNumber.invalid" class="invalid-feedback">
+                                    <div *ngIf="aadharNumber.errors.required">Aadhar No is required</div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-text">Front Image: </label>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="aadharFront"
+                                            (change)="onFileChange($event, 'aadharFront')"
+                                            [attr.disabled]="aadharFrontStatus ? '' : null">
+                                        <label class="custom-file-label" id="aadharFrontLabel" #labelImportView
+                                            for="aadharFront">Choose file</label>
+                                    </div>
+
+                                    <div *ngIf="!aadharFrontStatus; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableAadharFrontUploadBtn"
+                                            (click)="upload('aadharFront')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-text">Back Image: </label>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="aadharBack"
+                                            (change)="onFileChange($event, 'aadharBack')"
+                                            [attr.disabled]="aadharBackStatus ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="aadharBack">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!aadharBackStatus; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableAadharBackUploadBtn"
+                                            (click)="upload('aadharBack')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="imagePreview">
+                            <img *ngIf="aadharFront" [src]="aadharFront" class="details__image_style"
+                                alt="Applicant Image" style="width:100%; height:100%" (click)="open(1)" />
+                            <img *ngIf="aadharBack" [src]="aadharBack" class="details__image_style"
+                                alt="Applicant Image" style="width:100%; height:100%" (click)="open(1)" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card" style="margin-top: 15px;">
+                    <div class="card-header">Bank Passbook/Cancelled Cheque</div>
+                    <div class="card-body card-body-container">
+                        <div>
+                            <label class="form-text" for="payeeName"> Payee Name</label>
+                            <input class="form-control" type="text" id="payeeName" name="payeeName" #payeeName='ngModel'
+                                [(ngModel)]="kycDetails.payeeName" required>
+
+                            <label class="form-text" for="accountNumber"> Account Number</label>
+                            <input class="form-control" type="number" id="accountNumber" name="accountNumber"
+                                #accountNumber='ngModel' [(ngModel)]="kycDetails.accountNumber" required>
+
+                            <label class="form-text" for="ifscCode"> IFSC Code</label>
+                            <input class="form-control" type="text" id="ifscCode" name="ifscCode" #ifscCode='ngModel'
+                                [(ngModel)]="kycDetails.ifscCode" required>
+                            <label class="form-text">Passbook/Cancelled Cheque: </label>
+                            <div class="input-group" style="min-width: 300px;">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" multiple id="bankPassbook"
+                                        (change)="onFileChange($event, 'bankPassbook')"
+                                        [attr.disabled]="bankPassbookStatus ? '' : null">
+                                    <label class="custom-file-label" #labelImportView for="bankPassbook">Choose
+                                        file</label>
+                                </div>
+
+                                <div *ngIf="!bankPassbookStatus; else elseBlock" class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"
+                                        [disabled]="!enableBankPassbookUploadBtn"
+                                        (click)="upload('bankPassbook')">Upload</button>
+                                </div>
+                                <ng-template #elseBlock>
+                                    <div class="input-group-append">
+                                        <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                            style="color:green;margin-left: 10px;"></i>
+                                    </div>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                        <div class="imagePreview">
+                            <img *ngIf="bankPassbook" [src]="bankPassbook" class="details__image_style"
+                                alt="Applicant Image" style="width:100%; height:100%" (click)="open(1)" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card" style="margin-top: 15px;">
+                    <div class="card-header">GST</div>
+                    <div class="card-body card-body-container">
+                        <div>
+                            <label class="form-text" for="gstinNumber">GSTIN Number</label>
+                            <input class="form-control" type="text" id="payeeName" name="gstinNumber"
+                                #gstinNumber='ngModel' [(ngModel)]="kycDetails.gstinNumber" required>
+                            <label>Image: </label>
+                            <div class="input-group" style="min-width: 300px;">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" multiple id="gst"
+                                        (change)="onFileChange($event, 'gst')" [attr.disabled]="gstStatus ? '' : null">
+                                    <label class="custom-file-label" #labelImportView for="gst">Choose
+                                        file</label>
+                                </div>
+
+                                <div *ngIf="!gstStatus; else elseBlock" class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"
+                                        [disabled]="!enableGstUploadBtn" (click)="upload('gst')">Upload</button>
+                                </div>
+                                <ng-template #elseBlock>
+                                    <div class="input-group-append">
+                                        <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                            style="color:green;margin-left: 10px;"></i>
+                                    </div>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                        <div class="imagePreview">
+                            <img *ngIf="gst" [src]="gst" class="details__image_style" alt="Applicant Image"
+                                style="width:100%; height:100%" (click)="open(1)" />
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 15px;">
+                    <div class="card-header">ADDRESS</div>
+
+                    <div class="card-body card-body-container">
+                        <div>
+                            <div>
+                                <app-address></app-address>
+                            </div>
+                            <div>
+                                <label for="address_line_1"
+                                    style="display: flex; flex-direction: column; font-size: 14px; color:rgb(139, 139, 139)">
+                                    <div class="input-group" style="min-width: 300px;">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" multiple id="addressPic_1"
+                                                (change)="onFileChange($event, 'addressPic_1')"
+                                                [attr.disabled]="addressPic_1Status ? '' : null">
+                                            <label class="custom-file-label" #labelImportView for="addressPic_1">Choose
+                                                file</label>
+                                        </div>
+
+                                        <div *ngIf="!addressPic_1Status; else elseBlock" class="input-group-append">
+                                            <button class="btn btn-outline-primary" type="button"
+                                                [disabled]="!enableAddress_1UploadBtn"
+                                                (click)="upload('addressPic_1')">Upload</button>
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <div class="input-group-append">
+                                                <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                    style="color:green;margin-left: 10px;"></i>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                    Image-1:
+                                    <div>
+                                        <div>Pan No is required</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="imagePreview">
+                            <img *ngIf="gst" [src]="gst" class="details__image_style" alt="Applicant Image"
+                                style="width:100%; height:100%" (click)="open(1)" />
+                        </div>
+
+
+                        <div
+                            style="display: flex;flex-direction: row; justify-content: space-between; flex-wrap: wrap;">
+                            <div style="display: flex;flex-direction: column; ">
+                                <div><label>Image-1: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="addressPic_1"
+                                            (change)="onFileChange($event, 'addressPic_1')"
+                                            [attr.disabled]="addressPic_1Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="addressPic_1">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!addressPic_1Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableAddress_1UploadBtn"
+                                            (click)="upload('addressPic_1')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <div style="display: flex;flex-direction: column;">
+                                <div><label>Image-2: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="addressPic_2"
+                                            (change)="onFileChange($event, 'addressPic_2')"
+                                            [attr.disabled]="addressPic_2Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="addressPic_2">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!addressPic_2Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableAddress_2UploadBtn"
+                                            (click)="upload('addressPic_2')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            style="display: flex;flex-direction: row; justify-content: space-between;margin-top: 15px; flex-wrap: wrap;">
+                            <div style="display: flex;flex-direction: column;">
+                                <div><label>Image-3: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="addressPic_3"
+                                            (change)="onFileChange($event, 'addressPic_3')"
+                                            [attr.disabled]="addressPic_3Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="addressPic_3">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!addressPic_3Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableAddress_3UploadBtn"
+                                            (click)="upload('addressPic_3')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div style="display: flex;flex-direction: column;">
+                                <div><label>Image-4: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="addressPic_4"
+                                            (change)="onFileChange($event, 'addressPic_4')"
+                                            [attr.disabled]="addressPic_4Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="addressPic_4">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!addressPic_4Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableAddress_4UploadBtn"
+                                            (click)="upload('addressPic_4')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 15px;">
+                    <div class="card-header">STORE</div>
+
+                    <div class="card-body" style="display: flex;flex-direction: column;flex-wrap: wrap;">
+                        <div>
+                            <div><label>Name Board: </label></div>
+                            <div class="input-group" style="min-width: 300px;">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" multiple id="storeNameBoard"
+                                        (change)="onFileChange($event, 'storeNameBoard')"
+                                        [attr.disabled]="storeNameBoardStatus ? '' : null">
+                                    <label class="custom-file-label" #labelImportView for="storeNameBoard">Choose
+                                        file</label>
+                                </div>
+
+                                <div *ngIf="!storeNameBoardStatus; else elseBlock" class="input-group-append">
+                                    <button class="btn btn-outline-primary" type="button"
+                                        [disabled]="!enableStoreNameBoardUploadBtn"
+                                        (click)="upload('storeNameBoard')">Upload</button>
+                                </div>
+                                <ng-template #elseBlock>
+                                    <div class="input-group-append">
+                                        <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                            style="color:green;margin-left: 10px;"></i>
+                                    </div>
+                                </ng-template>
+
+                            </div>
+                        </div>
+
+                        <div
+                            style="display: flex;flex-direction: row; margin-top: 15px;flex-wrap: wrap;justify-content: space-between;">
+                            <div style="display: flex;flex-direction: column;">
+                                <div><label>Interior Pic-1: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="interiorPic_1"
+                                            (change)="onFileChange($event, 'interiorPic_1')"
+                                            [attr.disabled]="interiorPic_1Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="interiorPic_1">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!interiorPic_1Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableInteriorPic_1UploadBtn"
+                                            (click)="upload('interiorPic_1')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div style="display: flex;flex-direction: column;">
+                                <div><label>Interior Pic-2: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="interiorPic_2"
+                                            (change)="onFileChange($event, 'interiorPic_2')"
+                                            [attr.disabled]="interiorPic_2Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="interiorPic_2">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!interiorPic_2Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableInteriorPic_2UploadBtn"
+                                            (click)="upload('interiorPic_2')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            style="display: flex;flex-direction: row;  margin-top: 15px;flex-wrap: wrap;justify-content: space-between;">
+                            <div style="display: flex;flex-direction: column;">
+                                <div><label>Interior Pic-3: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="interiorPic_3"
+                                            (change)="onFileChange($event, 'interiorPic_3')"
+                                            [attr.disabled]="interiorPic_3Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="interiorPic_3">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!interiorPic_3Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableInteriorPic_3UploadBtn"
+                                            (click)="upload('interiorPic_3')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div style="display: flex;flex-direction: column;">
+                                <div><label>Interior Pic-4: </label></div>
+                                <div class="input-group" style="min-width: 300px;">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" multiple id="interiorPic_4"
+                                            (change)="onFileChange($event, 'interiorPic_4')"
+                                            [attr.disabled]="interiorPic_4Status ? '' : null">
+                                        <label class="custom-file-label" #labelImportView for="interiorPic_4">Choose
+                                            file</label>
+                                    </div>
+
+                                    <div *ngIf="!interiorPic_4Status; else elseBlock" class="input-group-append">
+                                        <button class="btn btn-outline-primary" type="button"
+                                            [disabled]="!enableInteriorPic_4UploadBtn"
+                                            (click)="upload('interiorPic_4')">Upload</button>
+                                    </div>
+                                    <ng-template #elseBlock>
+                                        <div class="input-group-append">
+                                            <i class="fa fa-check-circle fa-2x" aria-hidden="true"
+                                                style="color:green;margin-left: 10px;"></i>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -115,67 +587,5 @@
             </div>
 
         </div>
-        <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <input type="file" name="pan" (change)="onFileChange($event)" />
-        <button class="btn" type="submit">Upload</button>
-    </form> -->
-
-
-        <!-- <div>
-        <label>
-            PAN :
-            <input type="file" name="pan" (change)="onFileChange($event, 'pan')" />
-        </label>
-        <button class="btn" type="submit" (click)="upload('pan')">Upload</button>
-    </div>
-    <div>
-        <label>
-            AADHAR :
-            <input type="file" name="aadhar" (change)="onFileChange($event, 'aadhar')" />
-        </label>
-        <button class="btn" type="submit" (click)="upload('aadhar')">Upload</button>
-    </div>
-    <div>
-        <label>
-            Applicant Pic :
-            <input type="file" name="aaplicantPic" (change)="onFileChange($event, 'aaplicantPic')" />
-        </label>
-        <button class="btn" type="submit" (click)="upload('aaplicantPic')">Upload</button>
-    </div>
-    <div>
-        <label>
-            Store Board :
-            <input type="file" name="storeBoard" (change)="onFileChange($event, 'storeBoard')" />
-        </label>
-        <button class="btn" type="submit" (click)="upload('storeBoard')">Upload</button>
-    </div>
-    <div>
-        <label>
-            Store Interior Pic-1 :
-            <input type="file" name="storeInterior_1" (change)="onFileChange($event, 'storeInterior_1')" />
-        </label>
-        <button class="btn" type="submit" (click)="upload('storeInterior_1')">Upload</button>
-    </div>
-    <div>
-        <label>
-            Store Interior Pic-2 :
-            <input type="file" name="storeInterior_2" (change)="onFileChange($event, 'storeInterior_2')" />
-        </label>
-        <button class="btn" type="submit" (click)="upload('storeInterior_2')">Upload</button>
-    </div>
-    <div>
-        <label>
-            GST :
-            <input type="file" name="gst" (change)="onFileChange($event, 'gst')" />
-        </label>
-        <button class="btn" type="submit" (click)="upload('gst')">Upload</button>
-    </div>
-
-
-    <div *ngIf="uploadResponse.status === 'OK'">
-        <div>
-            File is uploaded successfully at {{uploadResponse.filePath}} location
-        </div>
-    </div> -->
     </div>
 </div>

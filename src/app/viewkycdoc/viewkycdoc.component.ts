@@ -1,6 +1,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation, NgxGalleryImageSize } from 'ngx-gallery';
 import { NgForm } from '@angular/forms';
+import { MEDIA_LOCATION_URL } from '../utils/url-constants'
 
 @Component({
   selector: 'app-viewkycdoc',
@@ -13,7 +14,7 @@ export class ViewkycdocComponent implements OnInit {
   docTypeList = [];
   categoryList = [];
   declinedReasonsList = [];
-  imagesList: any = []
+  // imagesList: any = []
   showReasonsDropDown: boolean = false;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -60,14 +61,10 @@ export class ViewkycdocComponent implements OnInit {
       reasonMessage: ""
     }
 
-    this.panLoction = 'https://images.pexels.com/photos/86594/goat-animal-horns-black-and-white-86594.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb';//'http://mediauploaddev.oyespace.com/Images/1554998207731.jpg'
+    this.panLoction = 'https://images.pexels.com/photos/86594/goat-animal-horns-black-and-white-86594.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb';
     this.docTypeList = this.getDocsList();
     this.categoryList = this.getCategoryList();
     this.declinedReasonsList = this.getDeclinedMessages();
-    this.imagesList.push(this.panLoction);
-    this.imagesList.push('http://mediauploaddev.oyespace.com/Images/1554998207731.jpg')
-    this.imagesList.push('https://4html.net/PDFViewer/#/source/sample_1.pdf')
-
 
     this.galleryOptions = [
       {
@@ -96,26 +93,15 @@ export class ViewkycdocComponent implements OnInit {
 
     this.galleryImages = [
       {
-        small: 'http://mediauploaduat.oyespace.com/Images/aadharBack.jpeg',
-        medium: 'http://mediauploaduat.oyespace.com/Images/aadharBack.jpeg',
-        big: 'http://mediauploaduat.oyespace.com/Images/aadharBack.jpeg'
+        small: MEDIA_LOCATION_URL.replace('{imageName}', 'aadharBack.jpeg'),
+        medium: MEDIA_LOCATION_URL.replace('{imageName}', 'aadharBack.jpeg'),
+        big: MEDIA_LOCATION_URL.replace('{imageName}', 'aadharBack.jpeg')
       },
       {
-        small: 'http://mediauploaduat.oyespace.com/Images/aadharFront.jpeg',
-        medium: 'http://mediauploaduat.oyespace.com/Images/aadharFront.jpeg',
-        big: 'http://mediauploaduat.oyespace.com/Images/aadharFront.jpeg'
+        small: MEDIA_LOCATION_URL.replace('{imageName}', 'aadharFront.jpeg'),
+        medium: MEDIA_LOCATION_URL.replace('{imageName}', 'aadharFront.jpeg'),
+        big: MEDIA_LOCATION_URL.replace('{imageName}', 'aadharFront.jpeg')
       },
-      {
-        small: 'http://mediauploaduat.oyespace.com/Images/ShivaCare.jpeg',
-        medium: 'http://mediauploaduat.oyespace.com/Images/ShivaCare.jpeg',
-        big: 'http://mediauploaduat.oyespace.com/Images/ShivaCare.jpeg'
-      },
-      {
-        small: 'assets/sample.pdf',
-        medium: 'assets/sample.pdf',
-        big: 'assets/sample.pdf'
-      }
-
     ];
 
   }

@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { ViewkycdocComponent } from './viewkycdoc/viewkycdoc.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { AddressComponent } from './address/address.component';
+import { DefaultImage } from './utils/defaultImage';
 
 
 
@@ -37,7 +38,8 @@ import { AddressComponent } from './address/address.component';
     KYCFileUploadComponent,
     HomeComponent,
     ViewkycdocComponent,
-    AddressComponent
+    AddressComponent,
+    DefaultImage
     
   ],
   imports: [

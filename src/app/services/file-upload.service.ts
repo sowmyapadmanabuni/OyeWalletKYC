@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { MEDIA_UPLOAD_URL } from '../utils/url-constants'
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
 
-  SERVER_URL: string = "https://mediauploaduat.oyespace.com";
 
   constructor(private httpClient: HttpClient) { }
 
-
   public upload(data, userId) {
-    let uploadURL = `${this.SERVER_URL}/oyeliving/api/V1/association/upload`;
 
-    return this.httpClient.post<any>(uploadURL, data, {
+    return this.httpClient.post<any>(MEDIA_UPLOAD_URL, data, {
       reportProgress: true,
       observe: 'events',
       headers: new HttpHeaders({
